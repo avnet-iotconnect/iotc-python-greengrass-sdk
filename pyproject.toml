@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iotconnect-greengrass-sdk"
+dynamic = ["version"]
+description = "Avnet IoTConnect Greengrass SDK"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "Nik Markovic", email = "nikola.markovic@avnet.com" },
+]
+
+keywords = [
+    "/IOTCONNECT",
+    "AWS",
+    "Greengrass",
+    "IoTCore",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Communications",
+    "Topic :: Internet",
+]
+dependencies = [
+    "iotconnect-lib<2.0.0",
+    "awsiotsdk<2.0.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/avnet-iotconnect/iotc-python-greengrass-sdk"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "avnet.iotconnect.sdk.greengrass.__version__"}
+
