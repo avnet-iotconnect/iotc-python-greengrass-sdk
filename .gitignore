@@ -1,0 +1,23 @@
+# Development IDEs
+/.idea/
+/.vscode/
+
+# Python Virtual Environment while devloping etc.
+/.venv/
+
+# Build generated files
+/**/zip-build/
+/**/greengrass-build/
+/build
+/dist
+/*.gz
+/*.whl
+
+# when massaging for a release with absolute links
+/README.*.md
+
+# This will be generated when making an editable installs
+src/iotconnect_greengrass_sdk.egg-info/
+
+# One can add files to local-packages
+/**/local-packages/

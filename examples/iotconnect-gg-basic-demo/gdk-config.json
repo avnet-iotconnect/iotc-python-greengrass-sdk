@@ -1,0 +1,16 @@
+{
+  "component": {
+    "com.avnet.example.IotConnectGgBasicDemo": {
+      "author": "Nik Markovic",
+      "version": "0.0.1",
+      "build": {
+        "build_system": "zip"
+      },
+      "publish": {
+        "bucket": "iotc-gg-basic-demo",
+        "region": "us-east-1"
+      }
+    }
+  },
+  "gdk_version": "1.0.0"
+}
