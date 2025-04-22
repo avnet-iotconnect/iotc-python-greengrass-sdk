@@ -1,4 +1,7 @@
 ---
+# IMPORTANT:
+# This recipe cannot be used as-is to be uploaded to /IOTCONNECT. Use build.sh to generate
+# the recipe that has proper CPID and Environment
 RecipeFormatVersion: "2020-01-25"
 ComponentName: "{{COMPONENT_NAME}}"
 ComponentVersion: "{{COMPONENT_VERSION}}"
@@ -7,7 +10,7 @@ ComponentPublisher: "{{COMPONENT_AUTHOR}}"
 ComponentConfiguration:
   DefaultConfiguration:
     IOTC_CPID: "MYCPID"
-    IOTC_ENV: "poc"
+    IOTC_ENV: "MYENV"
     accessControl:
       aws.greengrass.ipc.mqttproxy:
         com.avnet.example.IotConnectGgBasicDemo:mqttproxy:1:
@@ -37,8 +40,8 @@ Manifests:
       install:
         RequiresPrivilege: false
         Script: |
-          bash -x {artifacts:decompressedPath}/iotconnect-gg-basic-demo/scripts/install.sh
+          bash -x {artifacts:decompressedPath}/iotconnect-gg-basic-demo/wrapper/component-install.sh
       run:
         RequiresPrivilege: false
         Script: |
-          bash -x {artifacts:decompressedPath}/iotconnect-gg-basic-demo/scripts/run.sh '{configuration:}'
+          bash -x {artifacts:decompressedPath}/iotconnect-gg-basic-demo/wrapper/component-run.sh

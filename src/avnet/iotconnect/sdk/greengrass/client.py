@@ -10,7 +10,7 @@ from avnet.iotconnect.sdk.sdklib.error import C2DDecodeError, ClientError
 from avnet.iotconnect.sdk.sdklib.mqtt import C2dOta, C2dMessage, C2dCommand, C2dAck, TelemetryRecord, TelemetryValueType, encode_telemetry_records, encode_c2d_ack, decode_c2d_message
 from awsiot.greengrasscoreipc.client import SubscribeToIoTCoreStreamHandler
 from awsiot.greengrasscoreipc.clientv2 import GreengrassCoreIPCClientV2
-from awsiot.greengrasscoreipc.model import UnauthorizedError, ResourceNotFoundError, ServiceError, SubscriptionResponseMessage, QOS
+from awsiot.greengrasscoreipc.model import UnauthorizedError, ResourceNotFoundError, ServiceError, SubscriptionResponseMessage, QOS, IoTCoreMessage
 
 from .config import DeviceConfig
 
@@ -68,13 +68,25 @@ class Client:
 
         self.ipc_client = GreengrassCoreIPCClientV2()
 
-        # TODO: Add subscription for commands
         self.stream_handler = Client.SubscribeStreamHandler(self)
+
 
         if config is None:
             config = DeviceConfig.from_component_configuration(self.ipc_client)
 
         self.mqtt_config = DeviceRestApi(config.to_properties(), verbose=self.settings.verbose).get_identity_data()  # can raise DeviceConfigError
+
+        try:
+            self.ipc_client.subscribe_to_iot_core(
+                topic_name=self.mqtt_config.topics.c2d,
+                qos=QOS.AT_LEAST_ONCE,
+                stream_handler=self.stream_handler
+            )
+        except (ServiceError, UnauthorizedError, ResourceNotFoundError) as e:
+            raise ClientError(
+                "Failed to subscribe to C2D topic: Greengrass is either not connected, lacks permission, or encountered an internal error."
+            ) from e
+
 
     @classmethod
     def timestamp_now(cls) -> datetime:
@@ -267,13 +279,11 @@ class Client:
         def __init__(self, this_client: "Client"):
             self.client = this_client
 
-        def on_stream_event(self, event: SubscriptionResponseMessage) -> None:
-            if event.json_message is not None:
-                print("GOT JSON MESSAGE!")
-            payload = event.binary_message.message.decode('utf-8')
+        def on_stream_event(self, event: IoTCoreMessage) -> None:
+            payload = event.message.payload.decode('utf-8')
             if self.client.settings.verbose:
                 print("<", payload)
-            self.client._process_c2d_message(event.binary_message.context.topic, payload)
+            self.client._process_c2d_message(event.message.topic_name, payload)
 
         def on_stream_error(self, error: Exception) -> bool:
             if self.client.settings.verbose:

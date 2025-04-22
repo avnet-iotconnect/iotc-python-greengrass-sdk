@@ -11,9 +11,8 @@ set -e
 this_dir=$(dirname "$0")
 pushd "${this_dir}/.." >/dev/null
 
-
 REPO_URL="https://github.com/avnet-iotconnect/iotc-python-greengrass-sdk"
-VERSION_FILE="src/avnet/iotconnect/sdk/lite/__init__.py"
+VERSION_FILE="src/avnet/iotconnect/sdk/greengrass/__init__.py"
 README_PATH="README.md"
 README_PATH_WORK="README.work.md"
 README_PATH_BKP="README.bak.md"
@@ -64,6 +63,7 @@ echo "README prepared at $README_PATH_WORK"
 # Build the package using the temporary README
 cp "${README_PATH_WORK}" "${README_PATH}"
 python3 -m pip install build
+rm -rf build/
 python3 -m build
 
 # Cleanup

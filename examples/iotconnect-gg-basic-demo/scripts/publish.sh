@@ -1,2 +1,0 @@
-
-gdk component publish

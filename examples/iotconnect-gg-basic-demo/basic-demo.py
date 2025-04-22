@@ -1,4 +1,4 @@
-
+import os
 import random
 import sys
 import time
@@ -94,9 +94,7 @@ def on_ota(msg: C2dOta):
     c.send_ota_ack(msg, C2dAck.OTA_DOWNLOAD_FAILED, "Not implemented")
 
 
-
 try:
-
     c = Client(
         callbacks=Callbacks(
             command_cb=on_command,
@@ -105,7 +103,7 @@ try:
     )
     while True:
         send_telemetry()
-        time.sleep(10)
+        time.sleep(30)
 
 except DeviceConfigError as dce:
     print(dce)

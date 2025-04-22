@@ -19,4 +19,5 @@
 # This will be generated when making an editable installs
 src/iotconnect_greengrass_sdk.egg-info/
 
-
+# One can add files to local-packages
+/**/local-packages/

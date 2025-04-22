@@ -44,9 +44,14 @@ class DeviceConfig:
         try:
             response = ipc_client.get_configuration()
             config = response.value
+            cpid=config.get("IOTC_CPID")
+            env = config.get("IOTC_ENV")
+            if cpid == "MYCPID" or env == "MYENV":
+                raise DeviceConfigError("The component recipe is not processed to include your CPID and Environment!")
+
             return DeviceConfig(
-                cpid=config.get("IOTC_CPID"),
-                env=config.get("IOTC_ENV")
+                cpid=cpid,
+                env=env
             )
         except (ServiceError, UnauthorizedError, ResourceNotFoundError) as e:
             raise DeviceConfigError("Failed to retrieve component configuration from Greengrass. Check connectivity and permissions.") from e
