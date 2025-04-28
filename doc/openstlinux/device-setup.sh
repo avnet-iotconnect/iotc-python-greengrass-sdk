@@ -29,7 +29,8 @@ grep -q OpenSTLinux /etc/os-release || print_usage "OpenSTLinux not detected."
 
 # we will use git later in the script
 # cmake to build awscrt native bindings, and awscrt is required by awsiotsdk
-apt install -q -y --upgrade python3 python3-pip python3-venv git cmake || \
+# sudo for script compatibility - even though greengrass runs as root (I guess ST wanted to simplify and sacrifice security)
+apt install -q -y --upgrade python3 python3-pip python3-venv git cmake sudo || \
   print_usage "Failed to install required APT packages. Check your internet connection and that your board's image is upgraded to the latest."
 
 

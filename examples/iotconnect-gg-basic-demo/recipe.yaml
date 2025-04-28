@@ -9,8 +9,11 @@ ComponentDescription: "/IOTCONNECT Greengrass SDK Basic Demo."
 ComponentPublisher: "{{COMPONENT_AUTHOR}}"
 ComponentConfiguration:
   DefaultConfiguration:
-    IOTC_CPID: "MYCPID"
-    IOTC_ENV: "MYENV"
+    # These configuration values are optional, but may make enable additional
+    # SDK features in the future.
+    IOTC_DUID: null
+    IOTC_CPID: null
+    IOTC_ENV: null
     accessControl:
       aws.greengrass.ipc.mqttproxy:
         com.avnet.example.IotConnectGgBasicDemo:mqttproxy:1:

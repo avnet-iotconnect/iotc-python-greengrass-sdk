@@ -21,15 +21,15 @@ sudo -E /greengrass/v2/bin/greengrass-cli \
 
 exit 0
 # DEVELOPMENT NOTE:
-# This pattern can be used to inject runtime component configuration:
+# This pattern can be used instead of the line above to inject runtime component configuration:
 
 # shellcheck disable=SC2317
 IOTC_CONFIG=$(cat <<EOF
 {
   "com.avnet.example.IotConnectGgBasicDemo": {
      "MERGE": {
-      "IOTC_CPID": "${cpid}",
-      "IOTC_ENV": "${env}"
+      "IOTC_CPID": "${IOTC_CPID}",
+      "IOTC_ENV": "${IOTC_ENV}"
     }
   }
 }
