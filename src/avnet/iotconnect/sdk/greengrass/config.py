@@ -7,7 +7,6 @@ from typing import Optional
 
 from avnet.iotconnect.sdk.sdklib.config import DeviceProperties
 from avnet.iotconnect.sdk.sdklib.error import DeviceConfigError
-from avnet.iotconnect.sdk.sdklib.protocol.identity import ProtocolTopicsJson
 from awsiot.greengrasscoreipc.clientv2 import GreengrassCoreIPCClientV2
 from awsiot.greengrasscoreipc.model import ServiceError, UnauthorizedError, ResourceNotFoundError
 

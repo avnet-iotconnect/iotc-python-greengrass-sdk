@@ -119,13 +119,17 @@ class Client:
                 # Will likely raise DeviceConfigError as most likely the component comfig will be default with all nulls.
 
                 self.topics = DeviceRestApi(device_properties, verbose=self.settings.verbose).get_identity_data().topics
+                if self.settings.verbose:
+                    print("Successfully obtained device identity.")
             except DeviceConfigError:
                 pass
 
         if self.topics is None:
             # User did not configure the device.
-            # fall back to fixed topics from Thing Name.
+            # Fall back to fixed topics from Thing Name.
             self.topics = Client._mqtt_topics_from_greengrass_env()
+            if self.settings.verbose:
+                print("CPID and ENV are not configured. Used AWS_IOT_THING_NAME to determine the publish topics.")
 
         try:
             self.ipc_client.subscribe_to_iot_core(

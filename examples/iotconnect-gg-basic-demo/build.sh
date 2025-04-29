@@ -20,9 +20,9 @@ gdk component build
 recipe=greengrass-build/recipes/recipe.yaml
 if [[ -n ${IOTC_CPID} && -n ${IOTC_ENV} ]]; then
   echo "Applying CPID=${IOTC_CPID} and ENV=${IOTC_ENV} to default component configuration"
-  sed -i "s#IOTC_CPID: null#IOTC_CPID: ${IOTC_ENV}#g" ${recipe}
+  sed -i "s#IOTC_CPID: null#IOTC_CPID: ${IOTC_CPID}#g" ${recipe}
   sed -i "s#IOTC_ENV: null#IOTC_ENV: ${IOTC_ENV}#g" ${recipe}
-  if [[ -n ${duid} ]]; then
+  if [[ -n ${IOTC_DUID} ]]; then
     echo "Applying DUID==${IOTC_DUID} to default component configuration"
     sed -i "s#IOTC_DUID: null#IOTC_DUID: ${IOTC_DUID}#g" ${recipe}
   fi
