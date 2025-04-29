@@ -1,13 +1,14 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2024 Avnet
 # Authors: Nikola Markovic <nikola.markovic@avnet.com> et al.
-
+import os
 from datetime import datetime, timezone
 from typing import Callable, Optional
 
 from avnet.iotconnect.sdk.sdklib.dra import DeviceRestApi
-from avnet.iotconnect.sdk.sdklib.error import C2DDecodeError, ClientError
+from avnet.iotconnect.sdk.sdklib.error import C2DDecodeError, ClientError, DeviceConfigError
 from avnet.iotconnect.sdk.sdklib.mqtt import C2dOta, C2dMessage, C2dCommand, C2dAck, TelemetryRecord, TelemetryValueType, encode_telemetry_records, encode_c2d_ack, decode_c2d_message
+from avnet.iotconnect.sdk.sdklib.protocol.identity import ProtocolTopicsJson
 from awsiot.greengrasscoreipc.client import SubscribeToIoTCoreStreamHandler
 from awsiot.greengrasscoreipc.clientv2 import GreengrassCoreIPCClientV2
 from awsiot.greengrasscoreipc.model import UnauthorizedError, ResourceNotFoundError, ServiceError, SubscriptionResponseMessage, QOS, IoTCoreMessage
@@ -61,6 +62,42 @@ class Client:
             settings: ClientSettings = None,
             config: DeviceConfig = None
     ):
+        """
+        Avnet /IOTCONNECT Greengrass client that provides an easy way for the user to
+        connect integrate their Greengrass components with /IOTCONNECT, send and receive data.
+
+        Usage - See basic-demo example at https://github.com/avnet-iotconnect/iotc-python-greengrass-sdk for more details:
+
+        - Construct this client class:
+
+            - (Optional) provide callbacks for C2D Commands or device disconnect.
+                See the basic-example.py at https://github.com/avnet-iotconnect/iotc-python-lite-sdk example for details.
+
+            - (Optional) provide ClientSettings to tune the client behavior.
+
+            - (Optional) provide DeviceConfig to enhance this client's features.
+
+
+        - Send messages with Client.send_telemetry() or send_telemetry_records().
+            See the basic-demo example at https://github.com/avnet-iotconnect/iotc-python-lite-sdk for more info.
+            For example:
+                c.send_telemetry({
+                    'temperature': get_sensor_temperature()
+                })
+
+        - Receive Command or OTA callbacks and send command and OTA ACKs with send_command_ack()
+
+        :param callbacks: (Optional)
+            User callbacks for Command and OTA messages.
+            See Callbacks class.
+        :param settings: (Optional)
+            Settings that can be used to better control this client behavior.
+            See ClientSettings class.
+        :param config: (Optional)
+            The user can provide their CPID and environment. If provided,
+            the future implementation may or may not enable additional features
+            as the information that we can obtain without these parameters is limited.
+        """
         self.user_callbacks = callbacks or Callbacks()
         self.settings = settings or ClientSettings()
 
@@ -70,15 +107,33 @@ class Client:
 
         self.stream_handler = Client.SubscribeStreamHandler(self)
 
-
+        # get what we can from component config
         if config is None:
             config = DeviceConfig.from_component_configuration(self.ipc_client)
 
-        self.mqtt_config = DeviceRestApi(config.to_properties(), verbose=self.settings.verbose).get_identity_data()  # can raise DeviceConfigError
+        self.topics = None
+
+        device_properties=config.to_properties()
+        if device_properties is not None:
+            try:
+                # Will likely raise DeviceConfigError as most likely the component comfig will be default with all nulls.
+
+                self.topics = DeviceRestApi(device_properties, verbose=self.settings.verbose).get_identity_data().topics
+                if self.settings.verbose:
+                    print("Successfully obtained device identity.")
+            except DeviceConfigError:
+                pass
+
+        if self.topics is None:
+            # User did not configure the device.
+            # Fall back to fixed topics from Thing Name.
+            self.topics = Client._mqtt_topics_from_greengrass_env()
+            if self.settings.verbose:
+                print("CPID and ENV are not configured. Used AWS_IOT_THING_NAME to determine the publish topics.")
 
         try:
             self.ipc_client.subscribe_to_iot_core(
-                topic_name=self.mqtt_config.topics.c2d,
+                topic_name=self.topics.c2d,
                 qos=QOS.AT_LEAST_ONCE,
                 stream_handler=self.stream_handler
             )
@@ -135,9 +190,9 @@ class Client:
         packet = encode_telemetry_records(records)
         try:
             if self.settings.verbose:
-                print(">", packet)
+                print(">", packet, self.topics.rpt)
             self.ipc_client.publish_to_iot_core(
-                topic_name=self.mqtt_config.topics.rpt,
+                topic_name=self.topics.rpt,
                 qos=QOS.AT_LEAST_ONCE,
                 payload=bytes(packet, 'utf-8')
             )
@@ -217,7 +272,7 @@ class Client:
 
         try:
             self.ipc_client.publish_to_iot_core(
-                topic_name=self.mqtt_config.topics.ack,
+                topic_name=self.topics.ack,
                 qos=QOS.AT_LEAST_ONCE,
                 payload=bytes(packet, 'utf-8')
             )
@@ -295,3 +350,19 @@ class Client:
             Invoked when the stream for this operation is closed.
             """
             pass
+
+    # Fallback method if component is not configured.
+    # We cannot infer other information
+    @classmethod
+    def _mqtt_topics_from_greengrass_env(cls) -> ProtocolTopicsJson:
+        thing_name = os.getenv("AWS_IOT_THING_NAME")
+        topics = ProtocolTopicsJson()
+        topics.c2d = f'iot/${thing_name}/cmd'
+        topics.rpt = f'$aws/rules/msg_d2c_rpt/{thing_name}/2.1/0'
+        topics.di = f'$aws/rules/msg_d2c_di/{thing_name}/2.1/1'
+        topics.flt = f'$aws/rules/msg_d2c_flt/{thing_name}/2.1/3'
+        topics.od = f'$aws/rules/msg_d2c_od/{thing_name}/2.1/4'
+        topics.hb = f'$aws/rules/msg_d2c_hb/{thing_name}/2.1/5'
+        topics.ack = f'$aws/rules/msg_d2c_ack/{thing_name}/2.1/6'
+        topics.dl = f'$aws/rules/msg_d2c_dl/{thing_name}/2.1/7'
+        return topics

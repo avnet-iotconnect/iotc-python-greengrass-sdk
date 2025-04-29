@@ -4,17 +4,7 @@ set -e
 
 cd "$(dirname "$0")"
 
-cpid="$1"
-env="$2"
-
-if [[ -z "${cpid}" || -z "${env}" ]]; then
-  echo "Usage:"
-  echo " $0 <cpid> <env>"
-  exit 1
-fi
-
-which gdk > /dev/null
-if [[ 0 != $? ]]; then
+if which gdk > /dev/null; then
   python3 -m pip install -U git+https://github.com/aws-greengrass/aws-greengrass-gdk-cli.git@v1.6.2
 fi
 
@@ -28,6 +18,13 @@ fi
 gdk component build
 
 recipe=greengrass-build/recipes/recipe.yaml
-sed -i "s#MYCPID#${cpid}#g" ${recipe}
-sed -i "s#MYENV#${env}#g" ${recipe}
-echo "Recipe for ${cpid}:${env} is generated at ${recipe}. Upload THIS recipe to /IOTCONNECT"
+if [[ -n ${IOTC_CPID} && -n ${IOTC_ENV} ]]; then
+  echo "Applying CPID=${IOTC_CPID} and ENV=${IOTC_ENV} to default component configuration"
+  sed -i "s#IOTC_CPID: null#IOTC_CPID: ${IOTC_CPID}#g" ${recipe}
+  sed -i "s#IOTC_ENV: null#IOTC_ENV: ${IOTC_ENV}#g" ${recipe}
+  if [[ -n ${IOTC_DUID} ]]; then
+    echo "Applying DUID==${IOTC_DUID} to default component configuration"
+    sed -i "s#IOTC_DUID: null#IOTC_DUID: ${IOTC_DUID}#g" ${recipe}
+  fi
+fi
+echo "Recipe generated at ${recipe}. Upload THIS recipe to /IOTCONNECT"
