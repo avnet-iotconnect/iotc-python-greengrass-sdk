@@ -1,0 +1,54 @@
+---
+# IMPORTANT:
+# This recipe cannot be used as-is to be uploaded to /IOTCONNECT. Use build.sh to generate
+# the recipe that has proper CPID and Environment
+RecipeFormatVersion: "2020-01-25"
+ComponentName: "{{COMPONENT_NAME}}"
+ComponentVersion: "{{COMPONENT_VERSION}}"
+ComponentDescription: "/IOTCONNECT Greengrass SDK Basic Demo."
+ComponentPublisher: "{{COMPONENT_AUTHOR}}"
+ComponentConfiguration:
+  DefaultConfiguration:
+    # IOTC_CPID and IOTC_ENV configuration values are optional, but recommended.
+    # Specifying these values may be required for some SDK features in the future.
+    IOTC_CPID: null
+    IOTC_ENV: null
+    # DUID should generally NOT be provided, but can be used for troubleshooting.
+    IOTC_DUID: null
+
+    accessControl:
+      aws.greengrass.ipc.mqttproxy:
+        com.avnet.example.IotConnectSdkDhmDemo:mqttproxy:1:
+          policyDescription: "IotConnectSdkDhmDemo direct access to /IOTCONNECT IoTCore"
+          operations:
+          - "aws.greengrass#SubscribeToIoTCore"
+          - "aws.greengrass#PublishToIoTCore"
+          resources:
+          - "*"
+      # not using PIC topics for now, but the user can choose to do this for future-proofing:
+      aws.greengrass.ipc.pubsub:
+        com.avnet.example.IotConnectSdkDhmDemo:pubsub:1:
+          policyDescription: "IotConnectSdkDhmDemo access to local IPC topics"
+          operations:
+            - "aws.greengrass#PublishToTopic"
+            - "aws.greengrass#SubscribeToTopic"
+          resources:
+            - "*"
+Manifests:
+  - Platform:
+      os: linux
+      runtime: "*"
+    Artifacts:
+      - Uri: "s3://{{BUCKET_NAME}}/{{COMPONENT_NAME}}/{{VERSION}}//iotc-dhm-demo.zip"
+        Unarchive: ZIP
+    Lifecycle:
+      # the wildcard is there to deal with the initial backend version
+      # that enforces a globally unique name (zip may be renamed to include a version)
+      install:
+        RequiresPrivilege: false
+        Script: |
+          bash -x {artifacts:decompressedPath}/iotc-dhm-demo*/wrapper/component-install.sh
+      run:
+        RequiresPrivilege: false
+        Script: |
+          bash -x {artifacts:decompressedPath}/iotc-dhm-demo*/wrapper/component-run.sh

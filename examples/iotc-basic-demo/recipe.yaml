@@ -18,8 +18,8 @@ ComponentConfiguration:
 
     accessControl:
       aws.greengrass.ipc.mqttproxy:
-        com.avnet.example.IotConnectGgBasicDemo:mqttproxy:1:
-          policyDescription: "IotConnectGgBasicDemo direct access to /IOTCONNECT IoTCore"
+        com.avnet.example.IotConnectSdkBasicDemo:mqttproxy:1:
+          policyDescription: "IotConnectSdkBasicDemo direct access to /IOTCONNECT IoTCore"
           operations:
           - "aws.greengrass#SubscribeToIoTCore"
           - "aws.greengrass#PublishToIoTCore"
@@ -27,8 +27,8 @@ ComponentConfiguration:
           - "*"
       # not using PIC topics for now, but the user can choose to do this for future-proofing:
       aws.greengrass.ipc.pubsub:
-        com.avnet.example.IotConnectGgBasicDemo:pubsub:1:
-          policyDescription: "IotConnectGgBasicDemo access to local IPC topics"
+        com.avnet.example.IotConnectSdkBasicDemo:pubsub:1:
+          policyDescription: "IotConnectSdkBasicDemo access to local IPC topics"
           operations:
             - "aws.greengrass#PublishToTopic"
             - "aws.greengrass#SubscribeToTopic"
@@ -39,14 +39,16 @@ Manifests:
       os: linux
       runtime: "*"
     Artifacts:
-      - URI: "s3://{{BUCKET_NAME}}/{{COMPONENT_NAME}}/{{COMPONENT_VERSION}}/iotconnect-gg-basic-demo.zip"
+      - Uri: "s3://{{BUCKET_NAME}}/{{COMPONENT_NAME}}/{{VERSION}}/iotc-basic-demo.zip"
         Unarchive: ZIP
     Lifecycle:
+      # the wildcard is there to deal with the initial backend version
+      # that enforces a globally unique name (zip may be renamed to include a version)
       install:
         RequiresPrivilege: false
         Script: |
-          bash -x {artifacts:decompressedPath}/iotconnect-gg-basic-demo/wrapper/component-install.sh
+          bash -x {artifacts:decompressedPath}/iotc-basic-demo*/wrapper/component-install.sh
       run:
         RequiresPrivilege: false
         Script: |
-          bash -x {artifacts:decompressedPath}/iotconnect-gg-basic-demo/wrapper/component-run.sh
+          bash -x {artifacts:decompressedPath}/iotc-basic-demo*/wrapper/component-run.sh

@@ -1,0 +1,3 @@
+iotconnect-greengrass-sdk<2.0.0
+psutil<8.0.0
+py-cpuinfo<10.0.0

@@ -1,0 +1,291 @@
+{
+    "code": "ggsdkdemo",
+    "name": "ggsdkdemo",
+    "authType": 2,
+    "attributes": [
+        {
+            "name": "version",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "message",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "random",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "temperature",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "humidity",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "accel",
+            "type": "OBJECT",
+            "description": "",
+            "childs": [
+                {
+                    "name": "x",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "y",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                },
+                {
+                    "name": "z",
+                    "type": "DECIMAL",
+                    "description": "",
+                    "unit": "",
+                    "attributeColor": ""
+                }
+            ],
+            "aggregateTypes": []
+        },
+        {
+            "name": "lat_long",
+            "type": "LATLONG",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "sdk_version",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "uptime",
+            "type": "STRING",
+            "description": "System uptime in human-readable format",
+            "unit": null
+        },
+        {
+            "name": "hostname",
+            "type": "STRING",
+            "description": "System hostname",
+            "unit": null
+        },
+        {
+            "name": "system_info",
+            "type": "OBJECT",
+            "description": "System hardware and OS information",
+            "childs": [
+                {
+                    "name": "cpu_brand",
+                    "type": "STRING",
+                    "description": "CPU model name",
+                    "unit": null
+                },
+                {
+                    "name": "cpu_vendor",
+                    "type": "STRING",
+                    "description": "CPU vendor ID",
+                    "unit": null
+                },
+                {
+                    "name": "cpu_mhz",
+                    "type": "DECIMAL",
+                    "description": "Current CPU frequency in MHz",
+                    "unit": "MHz"
+                },
+                {
+                    "name": "cpu_physical_cores",
+                    "type": "INTEGER",
+                    "description": "Number of physical CPU cores",
+                    "unit": null
+                },
+                {
+                    "name": "architecture",
+                    "type": "STRING",
+                    "description": "System architecture (x86_64, arm64, etc.)",
+                    "unit": null
+                },
+                {
+                    "name": "system",
+                    "type": "STRING",
+                    "description": "Operating system name",
+                    "unit": null
+                },
+                {
+                    "name": "release",
+                    "type": "STRING",
+                    "description": "Kernel or OS release version",
+                    "unit": null
+                },
+                {
+                    "name": "platform",
+                    "type": "STRING",
+                    "description": "Full platform identification string",
+                    "unit": null
+                }
+            ]
+        },
+        {
+            "name": "cpu",
+            "type": "OBJECT",
+            "description": "CPU utilization information",
+            "childs": [
+                {
+                    "name": "usage_percent",
+                    "type": "DECIMAL",
+                    "description": "Total CPU usage percentage",
+                    "unit": "%"
+                },
+                {
+                    "name": "top_process_name",
+                    "type": "STRING",
+                    "description": "Name of process using most CPU",
+                    "unit": null
+                },
+                {
+                    "name": "top_process_cmd",
+                    "type": "STRING",
+                    "description": "Full command line of top CPU process",
+                    "unit": null
+                },
+                {
+                    "name": "top_process_cpu_percent",
+                    "type": "DECIMAL",
+                    "description": "CPU percentage used by top process",
+                    "unit": "%"
+                }
+            ]
+        },
+        {
+            "name": "memory",
+            "type": "OBJECT",
+            "description": "Memory usage information",
+            "childs": [
+                {
+                    "name": "total",
+                    "type": "STRING",
+                    "description": "Total installed memory",
+                    "unit": null
+                },
+                {
+                    "name": "available",
+                    "type": "STRING",
+                    "description": "Available memory for processes",
+                    "unit": null
+                },
+                {
+                    "name": "used",
+                    "type": "STRING",
+                    "description": "Used memory",
+                    "unit": null
+                },
+                {
+                    "name": "percent",
+                    "type": "DECIMAL",
+                    "description": "Percentage of memory used",
+                    "unit": "%"
+                },
+                {
+                    "name": "top_process_name",
+                    "type": "STRING",
+                    "description": "Name of process using most memory",
+                    "unit": null
+                },
+                {
+                    "name": "top_process_cmd",
+                    "type": "STRING",
+                    "description": "Full command line of top memory process",
+                    "unit": null
+                },
+                {
+                    "name": "top_process_mem",
+                    "type": "STRING",
+                    "description": "Memory used by top process",
+                    "unit": null
+                }
+            ]
+        },
+        {
+            "name": "storage",
+            "type": "OBJECT",
+            "description": "Disk storage information",
+            "childs": [
+                {
+                    "name": "total",
+                    "type": "STRING",
+                    "description": "Total storage capacity",
+                    "unit": null
+                },
+                {
+                    "name": "used",
+                    "type": "STRING",
+                    "description": "Used storage space",
+                    "unit": null
+                },
+                {
+                    "name": "free",
+                    "type": "STRING",
+                    "description": "Available free space",
+                    "unit": null
+                },
+                {
+                    "name": "percent",
+                    "type": "DECIMAL",
+                    "description": "Percentage of storage used",
+                    "unit": "%"
+                }
+            ]
+        }
+    ],
+    "commands": [
+        {
+            "name": "set-led",
+            "command": "set-led",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "list-leds",
+            "command": "list-leds",
+            "requiredParam": false,
+            "requiredAck": true,
+            "isOTACommand": false
+        }
+
+    ],
+    "messageVersion": "2.1",
+    "msgCode": "XG4E2QC",
+    "capability": "4",
+    "properties": {
+        "description": null,
+        "dataFrequency": "30",
+        "fileSupport": false
+    },
+    "_meta": {
+        "version": "2.0"
+    }
+}

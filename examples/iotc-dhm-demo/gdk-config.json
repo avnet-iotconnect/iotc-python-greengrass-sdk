@@ -1,13 +1,13 @@
 {
   "component": {
-    "com.avnet.example.IotConnectGgBasicDemo": {
+    "com.avnet.example.IotConnectSdkDhmDemo": {
       "author": "Nik Markovic",
       "version": "0.0.1",
       "build": {
         "build_system": "zip"
       },
       "publish": {
-        "bucket": "iotc-gg-basic-demo",
+        "bucket": "iotc-dhm-demo",
         "region": "us-east-1"
       }
     }
