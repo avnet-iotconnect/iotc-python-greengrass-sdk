@@ -64,13 +64,17 @@ the root directory of the example as that recipe will need to be processes.
 You can find all these Web UI pages in the *Firmware* (bottom of the screen) section of the *Device -> Greengrass Device* 
 section from the sidebar menu, with buttons at the top of the screen. 
 
-Click the **Component** button in the *Firmware* section for the next steps.
+
+Click the **Components** button in the *Firmware* section and either to register a new Component by following the steps below, 
+OR locate your existing component and *Upgrade* it by clicking the **Upgrade** button 
+on the right side of the component entry.
 
 A few extra steps required before uploading your component:
 - Rename your built component zip in the greengrass-build directory to contain a unique version number. 
-For example, rename iotc-basic-demo.zip to iotc-basic-demo-0.0.6.zip.
-- Once you upload your component, use the copy button on the right side of the files list 
+For example, rename iotc-basic-demo.zip to iotc-basic-demo-0.1.0.zip.
+- Once you upload your component, use the copy button on the right side panel with the files list 
 and apply it to the recipe.yaml URI section located in the greengrass-build directory. For example:
+
 ```yaml
 ...
 Manifests:
@@ -78,12 +82,13 @@ Manifests:
     os: linux
     runtime: '*'
   Artifacts:
-  - Uri: s3://root-1233456/123456789-2854-4a77-8f3b-ca1696401e08/gg-artifacts/iotc-basic-demo-0.0.6.zip
+  - Uri: s3://root-1233456/123456789-2854-4a77-8f3b-ca1696401e08/gg-artifacts/iotc-basic-demo-0.1.0.zip
     Unarchive: ZIP
   Lifecycle:
 ...
 ```
-- Note that ```URI``` should also be renamed into **lower case** ```Uri```
+
+- Upload the modified recipe and create the Component by clicking tge *Save* button.
 
 Once the Components are registered with /IOTCONNECT, you need to click the **Create Firmware** button in the *Firmware* section.
 

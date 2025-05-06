@@ -38,6 +38,21 @@ apt install -q -y --upgrade python3 python3-pip python3-venv python3-wheel git c
 if [[ "$(uname -m)" == "armv7l" ]]; then
   st_repo=STM32MP1_AWS-IoT-Greengrass-nucleus-lite
   st_revision=7585a4de19ae9726995eb27df732a720f47af527
+
+  echo Installing development packages...
+  rm -rf ~/tmp-apt
+  mkdir -p ~/tmp-apt
+  pushd ~/tmp-apt >/dev/null
+  apt -q -y install gcc g++ gcc-symlinks cpp-symlinks g++-symlinks binutils libc6-extra-nss libnss-db2 libc-malloc-debug0
+  curl -s -O "https://downloads.iotconnect.io/partners/st/packages/deb/arm7l/mp1-apt-dev-pack.tar.gz"
+  tar xf mp1-apt-dev-pack.tar.gz
+  rm mp1-apt-dev-pack.tar.gz
+  chown root:root ./*.deb
+  dpkg -i ./*.deb
+  popd >/dev/null
+  rm -rf ~/tmp-apt
+  echo Done installing development packages.
+
 elif [[ "$(uname -m)" == "aarch64" ]]; then
   st_repo=STM32MP2_AWS-IoT-Greengrass-nucleus-lite
   st_revision=54292e3f7d64ec84a880e9bb727e5f7836409f1b
@@ -64,7 +79,7 @@ bash 5_MPU_RunGGLite.sh
 unzip -q -o "${bundle_path}" config.yaml -d /etc/greengrass
 unzip -q -o "${bundle_path}" -d /var/lib/greengrass
 rm -f /var/lib/greengrass/config.yaml
-wget -q "https://www.amazontrust.com/repository/AmazonRootCA1.pem" -O /var/lib/greengrass/AmazonRootCA1.pem
+curl -s "https://www.amazontrust.com/repository/AmazonRootCA1.pem" --output /var/lib/greengrass/AmazonRootCA1.pem
 
 # (somewhat) fix permissions for the private key. We really would prefer that private key is not accessible by other users.
 chmod o-rwx /var/lib/greengrass/pk_*.pem
@@ -78,3 +93,5 @@ bash ~/gg_lite/run_nucleus
 popd >/dev/null # out of $repo..
 
 rm -rf ~/gg_lite "${st_repo}" # cleanup. We don't need these files anymore
+
+echo Done.
