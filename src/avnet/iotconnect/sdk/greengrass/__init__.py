@@ -1,4 +1,4 @@
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 # redirect these imports so that the user code is not affected by any changes in file organization
 from .client import Client, ClientSettings, Callbacks

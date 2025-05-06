@@ -357,7 +357,7 @@ class Client:
     def _mqtt_topics_from_greengrass_env(cls) -> ProtocolTopicsJson:
         thing_name = os.getenv("AWS_IOT_THING_NAME")
         topics = ProtocolTopicsJson()
-        topics.c2d = f'iot/${thing_name}/cmd'
+        topics.c2d = f'iot/{thing_name}/cmd'
         topics.rpt = f'$aws/rules/msg_d2c_rpt/{thing_name}/2.1/0'
         topics.di = f'$aws/rules/msg_d2c_di/{thing_name}/2.1/1'
         topics.flt = f'$aws/rules/msg_d2c_flt/{thing_name}/2.1/3'
