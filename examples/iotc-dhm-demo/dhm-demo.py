@@ -30,6 +30,10 @@ def on_command(msg: C2dCommand):
             if "1" == state_str or "true" == state_str.lower() or "on" == state_str.lower():
                 state = True
             status, message = systemleds.set_system_led(state, name)
+            if status:
+                # message will contain the name of the LED that was set
+                message = f"LED {message} set successfully"
+                # otherwise message will be error
             c.send_command_ack(msg, C2dAck.CMD_SUCCESS_WITH_ACK if status else C2dAck.CMD_FAILED, message)
             print(message)
         else:
@@ -38,7 +42,7 @@ def on_command(msg: C2dCommand):
     else:
         print("Command %s not implemented!" % msg.command_name)
         # You can send a failure ack for unrecognised commands, but other components may be servicing those commands,
-        # so we should not do this for Greengrass
+        # so we should not do this for Greengrass unless we know that we will be the only /IOTCONNECT component running
         #
         # if msg.ack_id is not None: # it could be a command without "Acknowledgement Required" flag in the device template
         #    c.send_command_ack(msg, C2dAck.CMD_FAILED, "Not Implemented")

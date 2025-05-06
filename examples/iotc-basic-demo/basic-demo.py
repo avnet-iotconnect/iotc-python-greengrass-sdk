@@ -86,7 +86,7 @@ def on_command(msg: C2dCommand):
     else:
         print("Command %s not implemented!" % msg.command_name)
         # You can send a failure ack for unrecognised commands, but other components may be servicing those commands,
-        # so we should not do this for Greengrass
+        # so we should not do this for Greengrass unless we know that we will be the only /IOTCONNECT component running
         #
         # if msg.ack_id is not None:  # it could be a command without "Acknowledgement Required" flag in the device template
         #    c.send_command_ack(msg, C2dAck.CMD_FAILED, "Not Implemented")
