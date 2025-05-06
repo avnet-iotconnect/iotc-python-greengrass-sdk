@@ -24,8 +24,8 @@ Keep in mind that once the package is downloaded, the actual version may differ.
 ```5.0.3-openstlinux-6.6-yocto-scarthgap-mpu-v24.11.06``` was tested with STM32 MP135F.
 
 The overall process with STM32CubeProgrammer is fairly complex and lengthy. 
-As an alternative, we suggest to explore the option of downloading the starter package instead, 
-and running the *create_sdcard_from_flashlayout.sh* utility in the scripts directory
+As an alternative, we suggest to explore the option of downloading the starter package, 
+and running the *create_sdcard_from_flashlayout.sh* utility instead in the scripts directory
 of the package in order to create an SD card image. 
 This SD card image can be then flashed onto the SD card with the ``dd`` 
 linux utility, Rufus, Balena Etcher and similar on other OS-es. 

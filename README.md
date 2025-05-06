@@ -6,7 +6,7 @@ The project based on the
 [/IOTCONNECT Python Library](https://github.com/avnet-iotconnect/iotc-python-lib).
 
 While the example Components and the SDK can be built on other OS-es, 
-only Linux is supported for development, along with the provided build scripts.
+only Linux is supported for guides, along with the provided build scripts.
 
 # Licensing
 
@@ -15,6 +15,8 @@ This python package is distributed under the [MIT License](LICENSE.md).
 # Installing the Greengrass Nucleus
 
 The Components using this SDK need to be run on a Greengrass Nucleus. 
+
+If testing our [examples](examples), see the README in that directory on how to set up the Device Remplate etc.
 
 When creating an /IOTCONNECT Greengrass Device (Nucleus)
 using the /IOTCONNECT Web UI:
@@ -27,9 +29,9 @@ your greengrass Component using this repository.
 
 # Building and Running The Examples
 
-For a reference implementation, see [examples/iotconnect-gg-basic-demo](examples/iotconnect-gg-basic-demo).
+For a reference implementation, see [examples/iotc-basic-demo](examples/iotc-basic-demo).
 
-To set up a Component package and recipe, first execute the [build.sh](examples/iotconnect-gg-basic-demo/build.sh)
+To set up a Component package and recipe, first execute the [build.sh](examples/iotc-basic-demo/build.sh)
 script in the selected corresponding example.
 
 There are two ways to build the example Components:
@@ -45,19 +47,58 @@ export IOTC_CPID=YourCPID
 
 These values can be obtained from **Settings -> Key Vault** on the /IOTCONNECT Web UI. 
 
-At this point in time, it is not strictly necessary to provide these values, and the SDK 
+At this point in time, it is not strictly necessary to provide these configuration values, and the SDK 
 will use the information provided by the Greengrass environment to guess the MQTT topics that 
 will be used to communicate to /IOTCONNECT, but in the future, 
 more advanced SDK features may require this.
 
-The build script should install **gdk** locally and build your Component such that 
+The build script will install **gdk** locally and build your Component such that 
 the provided CPID and Environment values will be injected into the recipe.yaml.
+
+# Deploying Your Components
 
 Once your Component is built, you can upload the zip package it along with the generated recipe from the
 ```greengrass-build``` directory of the Component. Do **NOT** use the ```recipe.yaml``` from
 the root directory of the example as that recipe will need to be processes.
 
-# Developing Your Components
+You can find all these Web UI pages in the *Firmware* (bottom of the screen) section of the *Device -> Greengrass Device* 
+section from the sidebar menu, with buttons at the top of the screen. 
+
+Click the **Component** button in the *Firmware* section for the next steps.
+
+A few extra steps required before uploading your component:
+- Rename your built component zip in the greengrass-build directory to contain a unique version number. 
+For example, rename iotc-basic-demo.zip to iotc-basic-demo-0.0.6.zip.
+- Once you upload your component, use the copy button on the right side of the files list 
+and apply it to the recipe.yaml URI section located in the greengrass-build directory. For example:
+```yaml
+...
+Manifests:
+- Platform:
+    os: linux
+    runtime: '*'
+  Artifacts:
+  - Uri: s3://root-1233456/123456789-2854-4a77-8f3b-ca1696401e08/gg-artifacts/iotc-basic-demo-0.0.6.zip
+    Unarchive: ZIP
+  Lifecycle:
+...
+```
+- Note that ```URI``` should also be renamed into **lower case** ```Uri```
+
+Once the Components are registered with /IOTCONNECT, you need to click the **Create Firmware** button in the *Firmware* section.
+
+Name your Firmware, select your previously created device template and set of Components that you want to deploy.
+You can search the Custom Components list for "Basic" or "Dhm" for example, depending on which Components you want to deploy.
+All of the available examples can be deployed to the same device as long as their Components have been previously registered.
+
+Once the **Firmware** is created, we need to deploy it to your device. Click the **Deployment** button in the *Formware* section.
+
+Name your deployment, select the previously created *Firmware*, and checkmark the components that you want to deploy and choose their versions.
+Select the devices that the components should be deployed.
+
+Telemetry data should start appearing after several minutes, and you can start sending /IOTCONNECT Commands to the devices. 
+
+# Developing Your Own Components
 
 To learn more about how to send telemetry, or receive commands, refer to the
 [/IOTCONNECT Python Lite SDK](https://github.com/avnet-iotconnect/iotc-python-sdk-lite) examples
