@@ -1,13 +1,15 @@
-import os
+import random
 import random
 import sys
 import time
 from dataclasses import dataclass, asdict
 
+from avnet.iotconnect.sdk.sdklib.error import ClientError
 from avnet.iotconnect.sdk.sdklib.mqtt import C2dOta, C2dAck
 
-from avnet.iotconnect.sdk.greengrass import Client, C2dCommand, TelemetryRecord, Callbacks, DeviceConfigError
+from avnet.iotconnect.sdk.greengrass import Client, C2dCommand, TelemetryRecord, Callbacks
 from avnet.iotconnect.sdk.greengrass import __version__ as SDK_VERSION
+
 
 @dataclass
 class ExampleAccelerometerData:
@@ -21,6 +23,7 @@ class ExampleSensorData:
     temperature: float
     humidity: float
     accel: ExampleAccelerometerData
+
 
 def send_telemetry():
     # Send simple data using a basic dictionary
@@ -69,11 +72,11 @@ def send_telemetry():
     c.send_telemetry_records(records)
 
 
-
 def on_command(msg: C2dCommand):
     print("Received command", msg.command_name, msg.command_args, msg.ack_id)
     if msg.command_name == "set-user-led":
         if len(msg.command_args) == 3:
+            # pretend that we actually RGB values
             status_message = "Setting User LED to R:%d G:%d B:%d" % (int(msg.command_args[0]), int(msg.command_args[1]), int(msg.command_args[2]))
             c.send_command_ack(msg, C2dAck.CMD_SUCCESS_WITH_ACK, status_message)
             print(status_message)
@@ -82,11 +85,17 @@ def on_command(msg: C2dCommand):
             print("Expected three command arguments, but got", len(msg.command_args))
     else:
         print("Command %s not implemented!" % msg.command_name)
-        if msg.ack_id is not None: # it could be a command without "Acknowledgement Required" flag in the device template
-            c.send_command_ack(msg, C2dAck.CMD_FAILED, "Not Implemented")
+        # You can send a failure ack for unrecognised commands, but other components may be servicing those commands,
+        # so we should not do this for Greengrass unless we know that we will be the only /IOTCONNECT component running
+        #
+        # if msg.ack_id is not None:  # it could be a command without "Acknowledgement Required" flag in the device template
+        #    c.send_command_ack(msg, C2dAck.CMD_FAILED, "Not Implemented")
 
 
 def on_ota(msg: C2dOta):
+    # IMPORTANT: When implementing a failure ack, ensure that we are
+    # THE ONLY /IOTCONNECT component that may be handling OTA
+
     # We just print the URL. The actual handling of the OTA request would be project specific.
     # See the ota-handling.py for more details.
     print("Received OTA request. File: %s Version: %s URL: %s" % (msg.urls[0].file_name, msg.version, msg.urls[0].url))
@@ -105,7 +114,6 @@ try:
         send_telemetry()
         time.sleep(30)
 
-except DeviceConfigError as dce:
-    print(dce)
+except ClientError as ce:
+    print(ce)
     sys.exit(1)
-

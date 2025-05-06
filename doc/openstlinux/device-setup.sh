@@ -30,11 +30,8 @@ grep -q OpenSTLinux /etc/os-release || print_usage "OpenSTLinux not detected."
 # we will use git later in the script
 # cmake to build awscrt native bindings, and awscrt is required by awsiotsdk
 # sudo for script compatibility - even though greengrass runs as root (I guess ST wanted to simplify and sacrifice security)
-apt install -q -y --upgrade python3 python3-pip python3-venv git cmake sudo || \
+apt install -q -y --upgrade python3 python3-pip python3-venv python3-wheel git cmake sudo || \
   print_usage "Failed to install required APT packages. Check your internet connection and that your board's image is upgraded to the latest."
-
-
-
 
 # It should be the case that mp1 is armv7l and the mp2 should aarch64
 # Use only revisions that are known to work. We don't want future changes to break something.
@@ -56,9 +53,12 @@ git reset --hard ${st_revision}
 mkdir -p ~/gg_lite
 cp -r gg_lite/* ~/gg_lite # 5_MPU_RunGGLite.sh the script expects the files to be in this location
 mkdir -p ~/gg_lite/certs # their scrip will print an error out if this directory doesn't exist, so hush that
+
+# don't run the nucleus just yet so that the logs are not stuffed with errors
+# shellcheck disable=SC2016
+sed -i '\#${GG_DIR}run_nucleus#d' ~/gg_lite/run_nucleus
+
 bash 5_MPU_RunGGLite.sh
-rm -rf ~/gg_lite "${st_repo}" # cleanup. We don't need these files anymore
-popd >/dev/null # out of $repo..
 
 # place config.yaml into /etc/greengrass
 # place certs and private key into /var/lib/greengrass
@@ -70,5 +70,11 @@ wget -q "https://www.amazontrust.com/repository/AmazonRootCA1.pem" -O /var/lib/g
 # (somewhat) fix permissions for the private key. We really would prefer that private key is not accessible by other users.
 chmod o-rwx /var/lib/greengrass/pk_*.pem
 
-# now restart the service
-systemctl restart greengrass-lite.target
+# make things idempotent:
+systemctl stop greengrass-lite.target >/dev/null 2>&1 || :
+
+# now we can run the nucleus and clean up
+bash ~/gg_lite/run_nucleus
+
+rm -rf ~/gg_lite "${st_repo}" # cleanup. We don't need these files anymore
+popd >/dev/null # out of $repo..
