@@ -75,5 +75,6 @@ systemctl stop greengrass-lite.target >/dev/null 2>&1 || :
 # now we can run the nucleus and clean up
 bash ~/gg_lite/run_nucleus
 
-rm -rf ~/gg_lite "${st_repo}" # cleanup. We don't need these files anymore
 popd >/dev/null # out of $repo..
+
+rm -rf ~/gg_lite "${st_repo}" # cleanup. We don't need these files anymore
