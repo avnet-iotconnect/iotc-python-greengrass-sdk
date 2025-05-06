@@ -56,8 +56,7 @@ mkdir -p ~/gg_lite/certs # their scrip will print an error out if this directory
 
 # don't run the nucleus just yet so that the logs are not stuffed with errors
 # shellcheck disable=SC2016
-sed -i '\#${GG_DIR}run_nucleus#d' ~/gg_lite/run_nucleus
-
+sed -i '\#${GG_DIR}run_nucleus#d' 5_MPU_RunGGLite.sh
 bash 5_MPU_RunGGLite.sh
 
 # place config.yaml into /etc/greengrass
