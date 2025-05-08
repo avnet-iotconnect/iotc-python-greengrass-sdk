@@ -5,10 +5,11 @@ set -x
 
 cd "$(dirname "$0")"/..
 
-
+# NOTE: This takes about 60 seconds on some STM32 MP1 devices. Tune the recipe timeout if we need more time.
 python3 -m venv ~/.venv-basic-demo
 
 source ~/.venv-basic-demo/bin/activate
+
 
 if [ "$(df --output=avail /tmp | tail -n 1)" -lt 524288 ];
   # Some STM32 MPx devices have 256 MB /tmp or less, and that's not enough to install awscrt (dependency of awsiotsdk)
@@ -27,18 +28,12 @@ if [[ -d local-packages ]]; then
 fi
 
 if grep OpenSTLinux /etc/issue > /dev/null && [[ $(uname -m) == armv7l ]]; then
-  # Special setup for OpenSTLinux on MP1 where pre-compiled package for awscrt is not available on pip
-  # Normally pip would compile those from source, but the build environment does not have everything needed to compile those
-  mkdir -p ~/tmp-wheels
-  awscrt_whl=awscrt-0.24.1-cp311-abi3-manylinux_2_28_armv7l.manylinux_2_31_armv7l.whl
-  awsiotsdk_whl=awsiotsdk-1.22.2-py3-none-any.whl
-  wget -q https://downloads.iotconnect.io/sdk/python/arm7l/$awscrt_whl -O ~/tmp-wheels/$awscrt_whl
-  wget -q https://downloads.iotconnect.io/sdk/python/arm7l/$awsiotsdk_whl -O ~/tmp-wheels/$awsiotsdk_whl
-  python3 -m pip install ~/tmp-wheels/$awscrt_whl ~/tmp-wheels/$awsiotsdk_whl
-  rm -rf ~/tmp-wheels
+  # for MP1, we will have some pre-built binaries here
+  python3 -m pip install --find-links=~/iotc-wheelhouse -r requirements.txt
+else
+  # for others, let's not have the warning printed for non-existing dir
+  python3 -m pip install -r requirements.txt
 fi
-
-python3 -m pip install -r requirements.txt
 
 if [ -n "$TMPDIR" ]; then
   rm -rf ~/tmp

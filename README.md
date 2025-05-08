@@ -57,6 +57,11 @@ the provided CPID and Environment values will be injected into the recipe.yaml.
 
 # Deploying Your Components
 
+This guide will summarize some of the steps to deploy your Components with /IOTCONNECT, 
+but for more details and a guide with screenshots, please refer to the 
+[/IOTCONNECT Greengrass Quickstart](https://docs.iotconnect.io/iotconnect/quick-start/greengrass-device/).
+
+
 Once your Component is built, you can upload the zip package it along with the generated recipe from the
 ```greengrass-build``` directory of the Component. Do **NOT** use the ```recipe.yaml``` from
 the root directory of the example as that recipe will need to be processes.
