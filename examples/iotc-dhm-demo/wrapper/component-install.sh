@@ -28,7 +28,7 @@ fi
 
 if grep OpenSTLinux /etc/issue > /dev/null && [[ $(uname -m) == armv7l ]]; then
   # for MP1, we will have some pre-built binaries here
-  python3 -m pip install --find-links=~/iotc-wheelhouse -r requirements.txt
+  python3 -m pip install --find-links="file://$HOME/iotc-wheelhouse" -r requirements.txt
 else
   # for others, let's not have the warning printed for non-existing dir
   python3 -m pip install -r requirements.txt

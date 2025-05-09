@@ -21,6 +21,9 @@ if [[ ! -f "${bundle_path}" ]]; then
   exit 1
 fi
 
+# if we are in different directory, record the full path...
+bundle_path=$(realpath "$bundle_path")
+
 apt update
 
 grep -q OpenSTLinux /etc/os-release || print_usage "OpenSTLinux not detected."
@@ -61,16 +64,24 @@ if [[ "$(uname -m)" == "armv7l" ]]; then
   rm -rf ~/tmp-apt
   echo Done installing development packages.
 
-  mkdir -p ~/iotc-wheelhouse
+  mkdir -p ~/iotc-wheelhouse\
+  # TODO: Big issue here - Greengrass runs with HOME=/root for some reason and not /home/root
+  # "Fix" for now with the symlink
+  mkidr -p /root # should be there, but just in case...
+  if [[ ! -h /root/iotc-wheelhouse ]]; then
+    ln -sf ~/iotc-wheelhouse /root/
+  fi
   pushd ~/iotc-wheelhouse >/dev/null
-  @echo "This directory contains cached wheel files, some of which are required for the /IOTCONNECT SDK. Do not remove these." \
+  set +x # avoid output confusion
+  echo "This directory contains cached wheel files, some of which are required for the /IOTCONNECT SDK. Do not remove these." \
     > README.txt
-  @echo "--------------------------------------------"
-  @echo "               IMPORTANT"
-  @echo " The setup process will now build some python packages from source."
-  @echo " This process take around 50 minutes, so please be patient..."
-  @echo "--------------------------------------------"
-
+  echo "--------------------------------------------"
+  echo "               IMPORTANT"
+  echo " The setup process will now build some python packages from source."
+  echo " During this process, the graphical session will be temporarily shut down."
+  echo " This process take around 50 minutes, so please be patient..."
+  echo "--------------------------------------------"
+  set -x
   python3 -m venv ~/venv-wheelhouse # not exactly sure if we need venv, but just to be safe..
   source ~/venv-wheelhouse/bin/activate
   mkdir -p ~/tmp
@@ -79,8 +90,9 @@ if [[ "$(uname -m)" == "armv7l" ]]; then
   unset TMPDIR
   rm -rf ~/tmp
   deactivate
+  rm -rf ~/venv-wheelhouse
   echo "Done pre-building python packages."
-
+  sudo systemctl daemon-reload # avoid warnings when attempting to start the service below... Not sure why this happens
   sudo systemctl start netdata.service
   sudo systemctl start weston-graphical-session.service
 
