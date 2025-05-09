@@ -1,8 +1,8 @@
 {
   "component": {
-    "com.avnet.example.IotConnectSdkDhmDemo": {
+    "io.iotconnect.example.IotConnectSdkDhmDemo": {
       "author": "Nik Markovic",
-      "version": "0.0.1",
+      "version": "0.0.3",
       "build": {
         "build_system": "zip"
       },

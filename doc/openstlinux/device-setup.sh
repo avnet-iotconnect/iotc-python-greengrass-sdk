@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 bundle_path="$1"
 
@@ -20,10 +21,10 @@ if [[ ! -f "${bundle_path}" ]]; then
   exit 1
 fi
 
-set -x
+# if we are in different directory, record the full path...
+bundle_path=$(realpath "$bundle_path")
 
 apt update
-
 
 grep -q OpenSTLinux /etc/os-release || print_usage "OpenSTLinux not detected."
 
@@ -33,11 +34,71 @@ grep -q OpenSTLinux /etc/os-release || print_usage "OpenSTLinux not detected."
 apt install -q -y --upgrade python3 python3-pip python3-venv python3-wheel git cmake sudo || \
   print_usage "Failed to install required APT packages. Check your internet connection and that your board's image is upgraded to the latest."
 
-# It should be the case that mp1 is armv7l and the mp2 should aarch64
+# It should be the case that mp1 is armv7l and the mp2 should be aarch64
 # Use only revisions that are known to work. We don't want future changes to break something.
 if [[ "$(uname -m)" == "armv7l" ]]; then
   st_repo=STM32MP1_AWS-IoT-Greengrass-nucleus-lite
   st_revision=7585a4de19ae9726995eb27df732a720f47af527
+
+  # We are low on RAM and can afford to disable these services:
+  sudo systemctl stop weston-graphical-session.service
+  sudo systemctl stop netdata.service
+
+  # python binary packages are not as widely available for 32-bit ARM processors,
+  # so sometimes the system will need to natively compile some packages.
+  # Specifically awsiotsdk will be needed by all our Greengrass Components it ant will want awscrt compiled.
+  # python3-cffi would be needed to compile the cryptography package on MP1's. May be needed in the future
+  # for the iotconnect-rest-api python package.
+  # The rest of the packages would setup a proper development environment.
+  echo Installing development packages...
+  rm -rf ~/tmp-apt
+  mkdir -p ~/tmp-apt
+  pushd ~/tmp-apt >/dev/null
+  apt -q -y install python3-cffi make gcc g++ gcc-symlinks cpp-symlinks g++-symlinks binutils libc6-extra-nss libnss-db2 libc-malloc-debug0
+  curl -s -O "https://downloads.iotconnect.io/partners/st/packages/deb/arm7l/mp1-apt-dev-pack.tar.gz"
+  tar xf mp1-apt-dev-pack.tar.gz
+  rm mp1-apt-dev-pack.tar.gz
+  chown root:root ./*.deb
+  dpkg -i ./*.deb
+  popd >/dev/null
+  rm -rf ~/tmp-apt
+  echo Done installing development packages.
+
+  mkdir -p ~/iotc-wheelhouse\
+  # TODO: Big issue here - Greengrass runs with HOME=/root for some reason and not /home/root
+  # "Fix" for now with the symlink
+  mkidr -p /root # should be there, but just in case...
+  if [[ ! -h /root/iotc-wheelhouse ]]; then
+    ln -sf ~/iotc-wheelhouse /root/
+  fi
+  pushd ~/iotc-wheelhouse >/dev/null
+  set +x # avoid output confusion
+  echo "This directory contains cached wheel files, some of which are required for the /IOTCONNECT SDK. Do not remove these." \
+    > README.txt
+  echo "--------------------------------------------"
+  echo "               IMPORTANT"
+  echo " The setup process will now build some python packages from source."
+  echo " During this process, the graphical session will be temporarily shut down."
+  echo " This process take around 50 minutes, so please be patient..."
+  echo "--------------------------------------------"
+  set -x
+  python3 -m venv ~/venv-wheelhouse # not exactly sure if we need venv, but just to be safe..
+  source ~/venv-wheelhouse/bin/activate
+  mkdir -p ~/tmp
+  export TMPDIR=~/tmp
+  python3 -m pip wheel awsiotsdk==1.22.2 psutil==7.0.0
+  unset TMPDIR
+  rm -rf ~/tmp
+  deactivate
+  rm -rf ~/venv-wheelhouse
+  echo "Done pre-building python packages."
+  sudo systemctl daemon-reload # avoid warnings when attempting to start the service below... Not sure why this happens
+  sudo systemctl start netdata.service
+  sudo systemctl start weston-graphical-session.service
+
+  popd >/dev/null # ~/iotc-wheelhouse
+
+
 elif [[ "$(uname -m)" == "aarch64" ]]; then
   st_repo=STM32MP2_AWS-IoT-Greengrass-nucleus-lite
   st_revision=54292e3f7d64ec84a880e9bb727e5f7836409f1b
@@ -64,7 +125,7 @@ bash 5_MPU_RunGGLite.sh
 unzip -q -o "${bundle_path}" config.yaml -d /etc/greengrass
 unzip -q -o "${bundle_path}" -d /var/lib/greengrass
 rm -f /var/lib/greengrass/config.yaml
-wget -q "https://www.amazontrust.com/repository/AmazonRootCA1.pem" -O /var/lib/greengrass/AmazonRootCA1.pem
+curl -s "https://www.amazontrust.com/repository/AmazonRootCA1.pem" --output /var/lib/greengrass/AmazonRootCA1.pem
 
 # (somewhat) fix permissions for the private key. We really would prefer that private key is not accessible by other users.
 chmod o-rwx /var/lib/greengrass/pk_*.pem
@@ -78,3 +139,6 @@ bash ~/gg_lite/run_nucleus
 popd >/dev/null # out of $repo..
 
 rm -rf ~/gg_lite "${st_repo}" # cleanup. We don't need these files anymore
+
+echo Done.
+

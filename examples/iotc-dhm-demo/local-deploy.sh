@@ -7,17 +7,17 @@ cd "$(dirname "$0")"
 ./build.sh "$@"
 
 sudo -E /greengrass/v2/bin/greengrass-cli \
-  component details --name "com.avnet.example.IotConnectSdkDhmDemo" | true
+  component details --name "io.iotconnect.example.IotConnectSdkDhmDemo" | true
 
 sudo -E /greengrass/v2/bin/greengrass-cli \
   deployment create \
-  --remove "com.avnet.example.IotConnectSdkDhmDemo" | true
+  --remove "io.iotconnect.example.IotConnectSdkDhmDemo" | true
 
 sudo -E /greengrass/v2/bin/greengrass-cli \
   deployment create \
   --recipeDir greengrass-build/recipes \
   --artifactDir greengrass-build/artifacts \
-  --merge "com.avnet.example.IotConnectSdkDhmDemo=0.0.1"
+  --merge "io.iotconnect.example.IotConnectSdkDhmDemo=0.1.0"
 
 exit 0
 # DEVELOPMENT NOTE:
@@ -26,7 +26,7 @@ exit 0
 # shellcheck disable=SC2317
 IOTC_CONFIG=$(cat <<EOF
 {
-  "com.avnet.example.IotConnectSdkDhmDemo": {
+  "io.iotconnect.example.IotConnectSdkDhmDemo": {
      "MERGE": {
       "IOTC_CPID": "${IOTC_CPID}",
       "IOTC_ENV": "${IOTC_ENV}"
@@ -41,5 +41,5 @@ sudo -E /greengrass/v2/bin/greengrass-cli \
 deployment create \
 --recipeDir ${PWD}/greengrass-build/recipes \
 --artifactDir ${PWD}/greengrass-build/artifacts \
---merge "com.avnet.example.IotConnectSdkDhmDemo=0.0.5" \
+--merge "io.iotconnect.example.IotConnectSdkDhmDemo=0.0.5" \
 --update-config "$IOTC_CONFIG"

@@ -18,7 +18,7 @@ ComponentConfiguration:
 
     accessControl:
       aws.greengrass.ipc.mqttproxy:
-        com.avnet.example.IotConnectSdkBasicDemo:mqttproxy:1:
+        io.iotconnect.example.IotConnectSdkBasicDemo:mqttproxy:1:
           policyDescription: "IotConnectSdkBasicDemo direct access to /IOTCONNECT IoTCore"
           operations:
           - "aws.greengrass#SubscribeToIoTCore"
@@ -27,7 +27,7 @@ ComponentConfiguration:
           - "*"
       # not using PIC topics for now, but the user can choose to do this for future-proofing:
       aws.greengrass.ipc.pubsub:
-        com.avnet.example.IotConnectSdkBasicDemo:pubsub:1:
+        io.iotconnect.example.IotConnectSdkBasicDemo:pubsub:1:
           policyDescription: "IotConnectSdkBasicDemo access to local IPC topics"
           operations:
             - "aws.greengrass#PublishToTopic"
@@ -39,6 +39,8 @@ Manifests:
       os: linux
       runtime: "*"
     Artifacts:
+      # Edit the line below with package s3 URL when uploading the component
+      # See instructions for registering Components in IoTConnect in the main README.md
       - Uri: "s3://{{BUCKET_NAME}}/{{COMPONENT_NAME}}/{{VERSION}}/iotc-basic-demo.zip"
         Unarchive: ZIP
     Lifecycle:
@@ -46,9 +48,11 @@ Manifests:
       # that enforces a globally unique name (zip may be renamed to include a version)
       install:
         RequiresPrivilege: false
+        Timeout: 600
         Script: |
           bash -x {artifacts:decompressedPath}/iotc-basic-demo*/wrapper/component-install.sh
       run:
         RequiresPrivilege: false
+        Timeout: 120
         Script: |
           bash -x {artifacts:decompressedPath}/iotc-basic-demo*/wrapper/component-run.sh

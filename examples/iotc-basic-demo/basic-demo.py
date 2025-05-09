@@ -1,5 +1,4 @@
 import random
-import random
 import sys
 import time
 from dataclasses import dataclass, asdict
