@@ -5,4 +5,5 @@ Refer to the directory that most closely corresponds to your device or area of i
 To create your Greengrass Device Template, use the ```all-apps-device-template.json```
 located in the examples/common/files directory to import a template JSON with /IOTCONNECT web UI.
 
-* [openstlinux](openstlinux): For OpenSTLinux based devices - STM32 MP1 and MP2 devices.  
+* [openstlinux](openstlinux): For OpenSTLinux based devices - STM32 MP1 and MP2 devices.
+* [ubuntu](openstlinux): AWS Nucleus Lite setup For Ubuntu 24.xx (PCs or Raspberry PI 64-bit).
