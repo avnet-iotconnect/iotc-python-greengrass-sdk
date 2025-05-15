@@ -44,10 +44,4 @@ bash device-setup.sh ~/my-device-package.zip
 
 At this point, the device should show up as **Connected** in /IOTCONNECT.
 
-If the device does not connect, you can follow the ST's troubleshooting guide for 
-[MP1](https://github.com/stm32-hotspot/STM32MP1_AWS-IoT-Greengrass-nucleus-lite/)
-/[MP2](https://github.com/stm32-hotspot/STM32MP1_AWS-IoT-Greengrass-nucleus-lite/),
-depending on your device. If the device still has issues, 
-you can provide the logs in an /IOTCONNECT support ticket using the /IOTCONNECT Web UI.
-
 
