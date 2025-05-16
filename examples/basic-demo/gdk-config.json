@@ -1,13 +1,13 @@
 {
   "component": {
-    "io.iotconnect.example.IotConnectSdkDhmDemo": {
+    "io.iotconnect.example.IotConnectSdkBasicDemo": {
       "author": "Nik Markovic",
-      "version": "0.0.3",
+      "version": "0.0.4",
       "build": {
         "build_system": "zip"
       },
       "publish": {
-        "bucket": "iotc-dhm-demo",
+        "bucket": "iotc-basic-demo",
         "region": "us-east-1"
       }
     }

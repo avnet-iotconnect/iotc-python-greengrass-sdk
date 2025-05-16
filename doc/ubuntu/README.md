@@ -25,6 +25,6 @@ wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-s
 bash device-setup.sh ~/my-device-bundle.zip
 ```
 
-At this point, the device should show up as **Connected** in /IOTCONNECT.
+At this point, the device should show up as **Connected** in /IOTCONNECT within a minute or so.
 
 

@@ -90,11 +90,16 @@ def to_display_time(seconds, granularity=2) -> str:
 
 def get_system_info():
     c = cpuinfo.get_cpu_info()
+    hz_per_core=c.get('hz_advertised')
+    hz_advertised_str = 'N/A'
+    if hz_per_core is not None and len(hz_per_core) > 0:
+        hz_advertised_str = str(int(hz_per_core[0] / 1e6))
+
     return SystemInfo(
         cpu_physical_cores=psutil.cpu_count(logical=False),
         cpu_brand=c.get('brand_raw'),
         cpu_vendor=c.get('vendor_id_raw'),
-        cpu_mhz=str(int(c['hz_advertised'][0] / 1e6)),
+        cpu_mhz=hz_advertised_str,
         architecture=platform.machine(),
         system=platform.system(),
         release=platform.release(),

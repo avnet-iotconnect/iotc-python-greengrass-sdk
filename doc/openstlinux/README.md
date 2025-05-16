@@ -27,7 +27,7 @@ The overall process with STM32CubeProgrammer is fairly complex and lengthy.
 As an alternative, we suggest to explore the option of downloading the starter package, 
 and running the *create_sdcard_from_flashlayout.sh* utility instead in the scripts directory
 of the package in order to create an SD card image. 
-This SD card image can be then flashed onto the SD card with the ``dd`` 
+This SD card image can be then flashed onto the SD card with the *dd* 
 linux utility, Rufus, Balena Etcher and similar on other OS-es. 
 
 # Device Setup
@@ -42,6 +42,6 @@ wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-s
 bash device-setup.sh ~/my-device-package.zip
 ```
 
-At this point, the device should show up as **Connected** in /IOTCONNECT.
+At this point, the device should show up as **Connected** in /IOTCONNECT within a minute or so.
 
 
