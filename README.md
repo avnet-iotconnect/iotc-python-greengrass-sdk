@@ -29,9 +29,9 @@ your greengrass Component using this repository.
 
 # Building and Running The Examples
 
-For a reference implementation, see [examples/iotc-basic-demo](examples/iotc-basic-demo).
+For a reference implementation, see [examples/basic-demo](examples/basic-demo).
 
-To set up a Component package and recipe, first execute the [build.sh](examples/iotc-basic-demo/build.sh)
+To set up a Component package and recipe, first execute the [build.sh](examples/basic-demo/build.sh)
 script in the selected corresponding example.
 
 There are two ways to build the example Components:
@@ -76,7 +76,7 @@ on the right side of the component entry.
 
 A few extra steps required before uploading your component:
 - Rename your built component zip in the greengrass-build directory to contain a unique version number. 
-For example, rename iotc-basic-demo.zip to iotc-basic-demo-0.1.0.zip.
+For example, rename basic-demo.zip to basic-demo-0.1.0.zip.
 - Once you upload your component, use the copy button on the right side panel with the files list 
 and apply it to the recipe.yaml URI section located in the greengrass-build directory. For example:
 
@@ -87,7 +87,7 @@ Manifests:
     os: linux
     runtime: '*'
   Artifacts:
-  - Uri: s3://root-1233456/123456789-2854-4a77-8f3b-ca1696401e08/gg-artifacts/iotc-basic-demo-0.1.0.zip
+  - Uri: s3://root-1233456/123456789-2854-4a77-8f3b-ca1696401e08/gg-artifacts/basic-demo-0.1.0.zip
     Unarchive: ZIP
   Lifecycle:
 ...
