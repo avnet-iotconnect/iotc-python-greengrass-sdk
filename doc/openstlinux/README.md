@@ -51,8 +51,12 @@ please note that root's HOME environment variable will be pointing to ```/root``
 the actual root's home. This has to do with the way systemd/initd services will be setting root's home to 
 a hardcoded value of /root on any system.
 
-You can work around this issue at runtime by linking /root to /home/root or when building your yocto image
-make sure that your bitbake *local.conf* sets the root's home to ```/root``` like this:
+Since both directories exist, this may not be a big issue, but the inconsistency could cause a confusion where
+Greengrass components or system services are placing or looking for files in places where one does not expect them to be.
+
+If this needs to be addressed in your case, you can work around this issue at runtime by linking /root to /home/root, 
+or when building their yocto image, you can
+make sure that bitbake *local.conf* sets the root's home to ```/root``` like this:
 ```
 ROOT_HOME = "/root"
 ```
