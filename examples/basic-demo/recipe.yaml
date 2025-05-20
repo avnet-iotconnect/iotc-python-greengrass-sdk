@@ -50,9 +50,9 @@ Manifests:
         RequiresPrivilege: false
         Timeout: 600
         Script: |
-          bash -x {artifacts:decompressedPath}/basic-demo/wrapper/component-install.sh
+          bash -x {artifacts:decompressedPath}/basic-demo*/wrapper/component-install.sh
       run:
         RequiresPrivilege: false
         Timeout: 120
         Script: |
-          bash -x {artifacts:decompressedPath}/basic-demo/wrapper/component-run.sh
+          bash -x {artifacts:decompressedPath}/basic-demo*/wrapper/component-run.sh

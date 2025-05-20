@@ -26,13 +26,14 @@ if [[ -d local-packages ]]; then
   python3 -m pip install --upgrade --force-reinstall ./local-packages/*.whl
 fi
 
-if grep OpenSTLinux /etc/issue > /dev/null && [[ $(uname -m) == armv7l ]]; then
-  # for MP1, we will have some pre-built binaries here
-  python3 -m pip install --find-links="file://$HOME/iotc-wheelhouse" -r requirements.txt
-else
-  # for others, let's not have the warning printed for non-existing dir
-  python3 -m pip install -r requirements.txt
+python3_opts=
+if [[ -d /var/cache/iotconnect/wheelhouse ]]; then
+     python3_opts=--find-links=file:///var/cache/iotconnect/wheelhouse
 fi
+
+# for others, let's not have the warning printed for non-existing dir
+# shellcheck disable=SC2086
+python3 -m pip install $python3_opts -r requirements.txt
 
 if [ -n "$TMPDIR" ]; then
   rm -rf ~/tmp
