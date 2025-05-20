@@ -44,4 +44,16 @@ bash device-setup.sh ~/my-device-package.zip
 
 At this point, the device should show up as **Connected** in /IOTCONNECT within a minute or so.
 
+# Known Issues
+
+If running component lifecycle steps with ```RequiresPrivilege: true``` or even any systemd services,
+please note that root's HOME environment variable will be pointing to ```/root```, rather than ```/home/root``` - which is 
+the actual root's home. This has to do with the way systemd/initd services will be setting root's home to 
+a hardcoded value of /root on any system.
+
+You can work around this issue at runtime by linking /root to /home/root or when building your yocto image
+make sure that your bitbake *local.conf* sets the root's home to ```/root``` like this:
+```
+ROOT_HOME = "/root"
+```
 
