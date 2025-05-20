@@ -40,7 +40,7 @@ echo /usr/lib/aarch64-linux-gnu > /etc/ld.so.conf.d/aarch64-linux-gnu.conf
 ldconfig
 
 # we were temporarily introducing this deb repository
-# so remove it, in case it can cause security issues or break the system
+# so remove it, so that we leave the system in a "most compatible" state
 rm -f /etc/apt/sources.list.d/bookworm.list
 apt clean
 
