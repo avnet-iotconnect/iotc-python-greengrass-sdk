@@ -42,6 +42,9 @@ wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-s
 bash device-setup.sh ~/my-device-package.zip
 ```
 
+> [NOTE!]
+> This step may take almost an hour on MP1 due to the installer needing to precompile some packages
+
 At this point, the device should show up as **Connected** in /IOTCONNECT within a minute or so.
 
 # Known Issues
