@@ -40,3 +40,5 @@ if [ -n "$TMPDIR" ]; then
   rm -rf ~/tmp
   unset TMPDIR # for any future changes down below this line
 fi
+
+echo Done.

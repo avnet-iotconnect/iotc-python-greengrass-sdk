@@ -5,20 +5,26 @@ set -x
 
 bundle_path="$1"
 
+
 function print_usage {
-  echo "usage $0 <bundle_path>"
-  echo " <bundle_path> - The zip file with device credentials downloaded from /IOTCONNECT."
-  echo "${1}"
+  echo "usage $0 <connection_kit_path>"
+  echo " <connection_kit_path> - The zip file with device credentials downloaded from /IOTCONNECT."
 }
 
-if [[ -z "${bundle_path}" ]]; then
-  print_usage "Bundle path argument is required"
+
+if [[ $EUID -ne 0 ]]; then
+  echo "ERROR: This script must be run as root!"
   exit 1
 fi
 
-if [[ ! -f "${bundle_path}" ]]; then
-  print_usage "Bundle file ${bundle_path} does not exist"
-  exit 1
+if [[ -z "${connection_kit_path}" ]]; then
+  print_usage "connection_kit_path path argument is required"
+  exit 2
+fi
+
+if [[ ! -f "${connection_kit_path}" ]]; then
+  print_usage "Connectio Kit file ${connection_kit_path} does not exist"
+  exit 3
 fi
 
 # if we are in different directory, record the full path...
@@ -30,8 +36,8 @@ grep -q OpenSTLinux /etc/os-release || print_usage "OpenSTLinux not detected."
 
 # we will use git later in the script
 # cmake to build awscrt native bindings, and awscrt is required by awsiotsdk
-# sudo for script compatibility - even though greengrass runs as root (I guess ST wanted to simplify and sacrifice security)
-apt install -q -y --upgrade python3 python3-pip python3-venv python3-wheel git cmake sudo || \
+#  for script compatibility - even though greengrass runs as root (I guess ST wanted to simplify and sacrifice security)
+apt install -q -y --upgrade python3 python3-pip python3-venv python3-wheel git cmake  || \
   print_usage "Failed to install required APT packages. Check your internet connection and that your board's image is upgraded to the latest."
 
 function mp1_install_build_packages {
@@ -61,8 +67,8 @@ function mp1_build_wheel_cache {
   # Otherwise this would take very long time during component installs
 
   # We are low on RAM and can disable these service go tet most of it back for now:
-  sudo systemctl stop weston-graphical-session.service
-  sudo systemctl stop netdata.service
+   systemctl stop weston-graphical-session.service
+   systemctl stop netdata.service
 
   mkdir -p /var/cache/iotconnect/wheelhouse
   pushd /var/cache/iotconnect/wheelhouse >/dev/null
@@ -86,11 +92,11 @@ function mp1_build_wheel_cache {
   deactivate
   rm -rf ~/venv-wheelhouse
   echo "Done pre-building python packages."
-  sudo systemctl daemon-reload # avoid warnings when attempting to start the service below... Not sure why this happens
+   systemctl daemon-reload # avoid warnings when attempting to start the service below... Not sure why this happens
 
   # Restart the services that we stopped previously
-  sudo systemctl start netdata.service
-  sudo systemctl start weston-graphical-session.service
+   systemctl start netdata.service
+   systemctl start weston-graphical-session.service
 
   popd >/dev/null # /var/cache/iotconnect/wheelhouse
 }
@@ -123,7 +129,7 @@ function install_ggl {
   deb_zip=aws-greengrass-lite-ubuntu-arm64.zip
   rm -f "${deb_package}"
   rm -f "${deb_zip}"
-  wget -q "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.1.0/${deb_zip}"
+  wget -nv "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.1.0/${deb_zip}"
   unzip -q -o "${deb_zip}"
 
   dpkg-deb --raw-extract "${deb_package}" ./pkg
@@ -143,28 +149,28 @@ function setup_nucleus_credentials {
   pushd /tmp/iotc-config >/dev/null
   unzip -q -o "${connection_kit_path}"
 
-  sudo mv config.yaml /etc/greengrass/config.yaml
-  sudo chmod a-x /etc/greengrass/config.yaml # just in case
-  sudo mkdir -p /var/lib/greengrass/certs/
-  sudo chown ggcore:ggcore /var/lib/greengrass/certs
-  sudo chmod 775 /var/lib/greengrass/certs
+   mv config.yaml /etc/greengrass/config.yaml
+   chmod a-x /etc/greengrass/config.yaml # just in case
+   mkdir -p /var/lib/greengrass/certs/
+   chown ggcore:ggcore /var/lib/greengrass/certs
+   chmod 775 /var/lib/greengrass/certs
   # there should be only one pem and crt here, so this is fine
   if [[ -f AmazonRootCA1.pem ]]; then
     # the new connection kit will have the proper files
-    sudo cp ./* /var/lib/greengrass/certs/
+     cp ./* /var/lib/greengrass/certs/
   else
     # The may not have this AmazonRootCA1.pem . If it does not, then it's the old "bundle"
-    sudo cp ./*.crt /var/lib/greengrass/certs/device.pem.crt
-    sudo cp ./*.pem /var/lib/greengrass/certs/private.pem.key
-    sudo curl -s "https://www.amazontrust.com/repository/AmazonRootCA1.pem" --output /var/lib/greengrass/certs/AmazonRootCA1.pem
+     cp ./*.crt /var/lib/greengrass/certs/device.pem.crt
+     cp ./*.pem /var/lib/greengrass/certs/private.pem.key
+     curl -s "https://www.amazontrust.com/repository/AmazonRootCA1.pem" --output /var/lib/greengrass/certs/AmazonRootCA1.pem
   fi
-  sudo chmod 660 /var/lib/greengrass/certs/*
-  sudo chown ggcore:ggcore /var/lib/greengrass/certs/*
+   chmod 660 /var/lib/greengrass/certs/*
+   chown ggcore:ggcore /var/lib/greengrass/certs/*
 
   popd >/dev/null # /tmp/iotc-config
   rm -rf /tmp/iotc-config
 
-  sudo tee /etc/greengrass/config.d/iotconnect-certs.yaml > /dev/null << END
+   tee /etc/greengrass/config.d/iotconnect-certs.yaml > /dev/null << END
 system:
   privateKeyPath: "/var/lib/greengrass/certs/private.pem.key"
   certificateFilePath: "/var/lib/greengrass/certs/device.pem.crt"
