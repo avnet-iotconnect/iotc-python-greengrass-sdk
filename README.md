@@ -77,11 +77,11 @@ As an advanced but faster alternative, we suggest to explore the option of downl
 and running the *create_sdcard_from_flashlayout.sh* utility instead in the scripts directory
 of the package in order to create an SD card image. 
 This SD card image can be then flashed onto the SD card with the *dd* 
-linux utility, Rufus, Balena Etcher and similar on other OS-es. 
+linux utility, Rufus, Balena Etcher and similar on other OS-es.
 
 # Device Setup
 
-Once your Greengrass device is created in /IOTCONNECT. (TBD link on boot switches) Download the device credentials 
+Once your Greengrass device is created in /IOTCONNECT. Download the device credentials 
 and transfer them to the device.
 
 Either clone this repo on the device and run [installer/openstlinux/device-setup.sh](installer/openstlinux/device-setup.sh) in this directory,
@@ -92,7 +92,8 @@ bash device-setup.sh ~/my-device-package.zip
 ```
 
 > [NOTE!]
-> This step may take almost an hour on MP1 due to the installer needing to precompile some packages
+> This step may take more than 50 minutes on, depending on your internet connection speed on MP1.
+> This is due to the installer needing to set up the development environment and needing to precompile some Python packages.
 
 ## Known Issues
 
@@ -267,7 +268,10 @@ or receive commands, refer to the
 [/IOTCONNECT Python Lite SDK](https://github.com/avnet-iotconnect/iotc-python-sdk-lite) examples,
 as. The /IOTCONNECT Python Lite SDK client interface closely matches that of this /IOTCONNECT Greengrass SDK Client.
 
-Here are the minimal high level steps that can be followed when making your own Components based on examples. 
+It is recommended that you get familiar with building and deploying the Basic Example before proceeding to create 
+your own component.
+
+Here are the minimal high level steps that can be followed when making your own Components based on the Basic Example. 
 We will be using *my-component* as the Component directory and *com.mycompany.MyComponent* as the Component name: 
 * Copy the basic-example code into a directory named *my-component*. *my-component* directory should contain recipe.yaml and other files.
 * Specify your Component version in gdk-config.json.
