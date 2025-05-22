@@ -91,22 +91,10 @@ def on_command(msg: C2dCommand):
         #    c.send_command_ack(msg, C2dAck.CMD_FAILED, "Not Implemented")
 
 
-def on_ota(msg: C2dOta):
-    # IMPORTANT: When implementing a failure ack, ensure that we are
-    # THE ONLY /IOTCONNECT component that may be handling OTA
-
-    # We just print the URL. The actual handling of the OTA request would be project specific.
-    # See the ota-handling.py for more details.
-    print("Received OTA request. File: %s Version: %s URL: %s" % (msg.urls[0].file_name, msg.version, msg.urls[0].url))
-    # OTA messages always have ack_id, so it is safe to not check for it before sending the ack
-    c.send_ota_ack(msg, C2dAck.OTA_DOWNLOAD_FAILED, "Not implemented")
-
-
 try:
     c = Client(
         callbacks=Callbacks(
-            command_cb=on_command,
-            ota_cb=on_ota
+            command_cb=on_command
         )
     )
     while True:

@@ -29,7 +29,8 @@ class Callbacks:
         :param command_cb: Callback function with first parameter being C2dCommand object.
             Use this callback to process commands sent by the back end.
 
-        :param ota_cb: Callback function with first parameter being C2dOta object.
+        :param ota_cb: Currently NOT IMPLEMENTED by the back end.
+            Callback function with first parameter being C2dOta object.
             Use this callback to process OTA updates sent by the back end.
 
         :param generic_message_callbacks: A dictionary of callbacks indexed by the message type.
