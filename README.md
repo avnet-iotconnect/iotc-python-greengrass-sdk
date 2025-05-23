@@ -32,11 +32,15 @@ button and then the **Import** button. .
 
 When creating an /IOTCONNECT Greengrass Device and Nucleus using the /IOTCONNECT Web UI:
 * Name your device and select the template created in the previous step.
-* If using Nucleus Classic, execute the script provided by the website and the follow the online instructions.
-* If using Nucleus Lite on Embedded Linux devices, download the device credential package bundle to the device 
-(using SCP for example) and follow the device-specific instructions below to install Nucleus Lite for 
-your specific Device/OS.
+* Choose Nucleus Classic if your device supports java, Python 3.9+ and Python "venv" command.  
+  * If using Nucleus Classic, execute the script provided by the website and the follow the online instructions.
+* Choose Nucleus Lite if your OS-specific installer is available in the list below in this guide.
+  * If using Nucleus Lite on Embedded Linux devices, download the device credential package bundle to the device 
+  (using SCP for example) and follow the device-specific installer instructions below to install Nucleus Lite for 
+  your specific Device/OS.
 * Use your device package name in place of ```my-device-bundle.zip``` in the platform/OS-specific steps below.
+
+### Greengrass Lite Installers
 
 [comment]: <> (-------------------------------------------------------------------------)
 <details>
