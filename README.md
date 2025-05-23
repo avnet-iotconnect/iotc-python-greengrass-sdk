@@ -279,7 +279,8 @@ We will be using *my-component* as the Component directory and *com.mycompany.My
 * The name of the directory determines the name of artifacts zip and the directory where the artifacts will be deployed.
 Therefore, it is required to modify the lifecycle steps to refer to *my-component* instead of basic-example 
 in the recipe.
-* In your python script that will be invoked by the *Run* Lifecycle step, ensure to:
+* Replace the *basic-sample.zip* with *my-component.zip* as well in the S3 artifact **Uri** path in recipe.yaml.
+* In your Python script that will be invoked by the *Run* Lifecycle step, ensure to:
   * Instantiate the Client with appropriate optional settings and callbacks object.
   * Implement the command callback if you want to be handling cloud-to-device commands.
   * Send your telemetry by invoking Client.send_telemetry()
