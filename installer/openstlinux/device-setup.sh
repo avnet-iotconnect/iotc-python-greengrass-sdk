@@ -3,8 +3,8 @@
 set -e
 set -x
 
-bundle_path="$1"
 
+connection_kit_path=${1}
 
 function print_usage {
   echo "usage $0 <connection_kit_path>"
@@ -28,7 +28,7 @@ if [[ ! -f "${connection_kit_path}" ]]; then
 fi
 
 # if we are in different directory, record the full path...
-bundle_path=$(realpath "$bundle_path")
+connection_kit_path=$(realpath "${connection_kit_path}")
 
 apt update
 
@@ -195,7 +195,7 @@ else
 fi
 
 install_ggl
-setup_nucleus_credentials "${bundle_path}"
+setup_nucleus_credentials "${connection_kit_path}"
 
 systemctl enable greengrass-lite.target
 systemctl restart greengrass-lite.target
