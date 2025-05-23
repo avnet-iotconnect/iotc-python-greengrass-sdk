@@ -67,8 +67,8 @@ function mp1_build_wheel_cache {
   # Otherwise this would take very long time during component installs
 
   # We are low on RAM and can disable these service go tet most of it back for now:
-   systemctl stop weston-graphical-session.service
-   systemctl stop netdata.service
+  systemctl stop weston-graphical-session.service
+  systemctl stop netdata.service
 
   mkdir -p /var/cache/iotconnect/wheelhouse
   pushd /var/cache/iotconnect/wheelhouse >/dev/null
@@ -82,21 +82,36 @@ function mp1_build_wheel_cache {
   echo " This process take around 50 minutes, so please be patient..."
   echo "--------------------------------------------"
   set -x
+  if [[ -z $(swapon -s) ]]; then # make this idempotent
+    if [[ ! -f /swapfile ]]; then
+      echo "Creating the swap file..."
+      dd if=/dev/zero of=/swapfile bs=1024 count=524288
+    fi
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+  fi
   python3 -m venv ~/venv-wheelhouse # not exactly sure if we need venv, but just to be safe..
+  echo "Creating the virtual environment..."
   source ~/venv-wheelhouse/bin/activate
   mkdir -p ~/tmp
   export TMPDIR=~/tmp
+  echo "Building the packages..."
   python3 -m pip wheel awsiotsdk==1.22.2 psutil==7.0.0
   unset TMPDIR
   rm -rf ~/tmp
   deactivate
   rm -rf ~/venv-wheelhouse
   echo "Done pre-building python packages."
-   systemctl daemon-reload # avoid warnings when attempting to start the service below... Not sure why this happens
+  systemctl daemon-reload # avoid warnings when attempting to start the service below... Not sure why this happens
+
+  # We don't need swap anymore
+  swapoff /swapfile
+  rm -f /swapfile
 
   # Restart the services that we stopped previously
-   systemctl start netdata.service
-   systemctl start weston-graphical-session.service
+  systemctl start netdata.service
+  systemctl start weston-graphical-session.service
 
   popd >/dev/null # /var/cache/iotconnect/wheelhouse
 }
