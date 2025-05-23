@@ -212,7 +212,7 @@ Once your Component is built or the pre-built Component downloaded,
 you can upload the zip artifact along with the recipe from the
 ```greengrass-build``` directory of the Component. If building from source, 
 Do **NOT** use the ```recipe.yaml``` from
-source the root directory of the example as that recipe will need to be processed.
+the root directory of the example's source, as that recipe will need to be processed.
 
 You can find all these Web UI pages in the *Firmware* (bottom of the screen) toolbar 
 of the *Device -> Greengrass Device* 
