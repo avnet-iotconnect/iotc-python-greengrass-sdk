@@ -95,7 +95,7 @@ wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-s
 bash device-setup.sh ~/my-device-package.zip
 ```
 
-> This step may take more than 50 minutes on some devices, depending on your internet connection speed and the CPU of the device.
+> This step may take more than 50 minutes on some devices, depending on your internet connection speed and device's CPU.
 > This is due to the installer needing to set up the development environment and needing to precompile a set of Python packages.
 
 ## Known Issues
