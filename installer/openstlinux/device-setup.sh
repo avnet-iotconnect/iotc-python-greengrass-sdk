@@ -52,7 +52,7 @@ function mp1_install_build_packages {
   mkdir -p ~/tmp-apt
   pushd ~/tmp-apt >/dev/null
   apt -q -y install python3-cffi make gcc g++ gcc-symlinks cpp-symlinks g++-symlinks binutils libc6-extra-nss libnss-db2 libc-malloc-debug0
-  curl -s -O "https://downloads.iotconnect.io/partners/st/packages/deb/arm7l/mp1-apt-dev-pack.tar.gz"
+  curl --insecure -s -O "https://downloads.iotconnect.io/partners/st/packages/deb/arm7l/mp1-apt-dev-pack.tar.gz"
   tar xf mp1-apt-dev-pack.tar.gz
   rm mp1-apt-dev-pack.tar.gz
   chown root:root ./*.deb
@@ -72,6 +72,11 @@ function mp1_build_wheel_cache {
 
   mkdir -p /var/cache/iotconnect/wheelhouse
   pushd /var/cache/iotconnect/wheelhouse >/dev/null
+  prebuilt_wheels=$(ls ~/prebuilt-wheels-*-armv7l.tgz 2>/dev/null || :)
+  if [[ -n ${prebuilt_wheels} ]]; then
+    echo "Installing the pre-built packages..."
+    tar -zxvf "${prebuilt_wheels}"
+  fi
   set +x # avoid output confusion
   echo "This directory contains cached wheel files, some of which are required for the /IOTCONNECT SDK. Do not remove these." \
     > README.txt
@@ -216,4 +221,3 @@ systemctl enable greengrass-lite.target
 systemctl restart greengrass-lite.target
 
 echo Done.
-
