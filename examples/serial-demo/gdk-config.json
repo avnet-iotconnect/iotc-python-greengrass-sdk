@@ -1,0 +1,16 @@
+{
+  "component": {
+    "io.iotconnect.example.IotConnectSdkSerialDemo": {
+      "author": "Nik Markovic",
+      "version": "0.0.3",
+      "build": {
+        "build_system": "zip"
+      },
+      "publish": {
+        "bucket": "iotc-serial-demo",
+        "region": "us-east-1"
+      }
+    }
+  },
+  "gdk_version": "1.0.0"
+}

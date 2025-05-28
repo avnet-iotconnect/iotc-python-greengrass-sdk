@@ -274,8 +274,21 @@
             "requiredParam": false,
             "requiredAck": true,
             "isOTACommand": false
+        },
+        {
+            "name": "serial-open",
+            "command": "serial-open",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "serial-send",
+            "command": "serial-send",
+            "requiredParam": false,
+            "requiredAck": true,
+            "isOTACommand": false
         }
-
     ],
     "messageVersion": "2.1",
     "msgCode": "XG4E2QC",

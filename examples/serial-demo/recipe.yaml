@@ -5,7 +5,7 @@
 RecipeFormatVersion: "2020-01-25"
 ComponentName: "{{COMPONENT_NAME}}"
 ComponentVersion: "{{COMPONENT_VERSION}}"
-ComponentDescription: "/IOTCONNECT Greengrass SDK Device Health Monitoring Demo."
+ComponentDescription: "/IOTCONNECT Greengrass SDK Seral Demo."
 ComponentPublisher: "{{COMPONENT_AUTHOR}}"
 ComponentConfiguration:
   DefaultConfiguration:
@@ -18,8 +18,8 @@ ComponentConfiguration:
 
     accessControl:
       aws.greengrass.ipc.mqttproxy:
-        io.iotconnect.example.IotConnectSdkDhmDemo:mqttproxy:1:
-          policyDescription: "IotConnectSdkDhmDemo direct access to /IOTCONNECT IoTCore"
+        io.iotconnect.example.IotConnectSdkSerialDemo:mqttproxy:1:
+          policyDescription: "IotConnectSdkSerialDemo direct access to /IOTCONNECT IoTCore"
           operations:
           - "aws.greengrass#SubscribeToIoTCore"
           - "aws.greengrass#PublishToIoTCore"
@@ -27,8 +27,8 @@ ComponentConfiguration:
           - "*"
       # not using PIC topics for now, but the user can choose to do this for future-proofing:
       aws.greengrass.ipc.pubsub:
-        io.iotconnect.example.IotConnectSdkDhmDemo:pubsub:1:
-          policyDescription: "IotConnectSdkDhmDemo access to local IPC topics"
+        io.iotconnect.example.IotConnectSdkSerialDemo:pubsub:1:
+          policyDescription: "IotConnectSdkSerialDemo access to local IPC topics"
           operations:
             - "aws.greengrass#PublishToTopic"
             - "aws.greengrass#SubscribeToTopic"
@@ -41,7 +41,7 @@ Manifests:
     Artifacts:
       # Edit the line below with package s3 URL when uploading the component
       # See instructions for registering Components in IoTConnect in the main README.md
-      - Uri: "s3://{{BUCKET_NAME}}/{{COMPONENT_NAME}}/{{VERSION}}/dhm-demo.zip"
+      - Uri: "s3://{{BUCKET_NAME}}/{{COMPONENT_NAME}}/{{VERSION}}/serial-demo.zip"
         Unarchive: ZIP
     Lifecycle:
       # the wildcard is there to deal with the initial backend version
@@ -50,9 +50,9 @@ Manifests:
         RequiresPrivilege: false
         Timeout: 600
         Script: |
-          bash -x {artifacts:decompressedPath}/dhm-demo*/wrapper/component-install.sh
+          bash -x {artifacts:decompressedPath}/serial-demo*/wrapper/component-install.sh
       run:
         RequiresPrivilege: false
         Timeout: 120
         Script: |
-          bash -x {artifacts:decompressedPath}/dhm-demo*/wrapper/component-run.sh
+          bash -x {artifacts:decompressedPath}/serial-demo*/wrapper/component-run.sh
