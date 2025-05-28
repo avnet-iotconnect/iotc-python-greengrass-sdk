@@ -52,7 +52,7 @@ function mp1_install_build_packages {
   mkdir -p ~/tmp-apt
   pushd ~/tmp-apt >/dev/null
   apt -q -y install python3-cffi make gcc g++ gcc-symlinks cpp-symlinks g++-symlinks binutils libc6-extra-nss libnss-db2 libc-malloc-debug0
-  curl --insecure -s -O "https://downloads.iotconnect.io/partners/st/packages/deb/arm7l/mp1-apt-dev-pack.tar.gz"
+  curl -s -O "https://downloads.iotconnect.io/partners/st/packages/deb/arm7l/mp1-apt-dev-pack.tar.gz"
   tar xf mp1-apt-dev-pack.tar.gz
   rm mp1-apt-dev-pack.tar.gz
   chown root:root ./*.deb
@@ -72,6 +72,9 @@ function mp1_build_wheel_cache {
 
   mkdir -p /var/cache/iotconnect/wheelhouse
   pushd /var/cache/iotconnect/wheelhouse >/dev/null
+  curl -s -O https://downloads.iotconnect.io/partners/st/packages/python/mp1/prebuilt-wheels-cp3x-armv7l.tgz
+  tar zxvf prebuilt-wheels-cp3x-armv7l.tgz
+  # in case the user has any as well...
   prebuilt_wheels=$(ls ~/prebuilt-wheels-*-armv7l.tgz 2>/dev/null || :)
   if [[ -n ${prebuilt_wheels} ]]; then
     echo "Installing the pre-built packages..."
@@ -81,10 +84,10 @@ function mp1_build_wheel_cache {
   echo "This directory contains cached wheel files, some of which are required for the /IOTCONNECT SDK. Do not remove these." \
     > README.txt
   echo "--------------------------------------------"
-  echo "               IMPORTANT"
-  echo " The setup process will now build some python packages from source."
+  echo " The setup process will download a set of python packages,"
+  echo " check if they need to be built source and cache them on your system."
   echo " During this process, the graphical session will be temporarily shut down."
-  echo " This process take around 50 minutes, so please be patient..."
+  echo " This process may take some time, so please be patient..."
   echo "--------------------------------------------"
   set -x
   if [[ -z $(swapon -s) ]]; then # make this idempotent
@@ -102,7 +105,7 @@ function mp1_build_wheel_cache {
   mkdir -p ~/tmp
   export TMPDIR=~/tmp
   echo "Building the packages..."
-  python3 -m pip wheel awsiotsdk==1.22.2 psutil==7.0.0
+  python3 -m pip wheel --find-links=file:///var/cache/iotconnect/wheelhouse awsiotsdk==1.22.2 psutil==7.0.0
   unset TMPDIR
   rm -rf ~/tmp
   deactivate
