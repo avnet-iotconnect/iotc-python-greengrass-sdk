@@ -1,12 +1,14 @@
 # Introduction
-This repository provides the Avnet integration for **AWS IoT Greengrass Nucleus Lite** (the C-based, ultra-lightweight edge runtime) and **AWS IoT Greengrass Nucleus Classic** (the full-featured Java-based runtime)––enabling both constrained and resource-rich Linux devices ([Developer Guide][1], [AWS IoT Blog][2]).
 
-Built on top of the [/IOTCONNECT Python Library](https://github.com/avnet-iotconnect/iotc-python-lib), this SDK allows users to:
-- **Rapidly onboard devices** via the /IOTCONNECT Web UI (one-click creation of user roles, IoT Core resources, and download of a Greengrass connection bundle).
-- **Automate Greengrass Nucleus Lite installation** on embedded Linux (`systemd`-based services, up-to-date AWS binaries).
-- **Leverage the /IOTCONNECT example components** for telemetry, commands, and OTA updates with a ready-to-use Python client.
+This repository provides the Avnet /IOTCONNECT AWS Greengrass SDK for building **Python-based Greengrass Components**, supporting both **AWS IoT Greengrass Nucleus Lite** 
+(the C-based, ultra-lightweight edge runtime) and **AWS IoT Greengrass Nucleus Classic** (the full-featured Java-based runtime) ([Developer Guide][1], [AWS IoT Blog][2]).
 
-> **Note:** Although examples can compile on other OS-es, official guides, build scripts, and tested installers are provided only for Linux distributions with `systemd` support.
+With this SDK you can:
+- **Use the provided example Components** to send telemetry, receive commands, and handle OTA updates (OTA push support coming soon)
+- **Write your own Python Components** using the /IOTCONNECT 2.1 JSON protocol, with built-in helpers for `send_telemetry()`, command callbacks, and OTA lifecycle
+- **Deploy Components and Firmware** via the IoTConnect Web UI (Device Template → Component registration → Firmware = set of Components → Deployment)
+
+> **ℹ️ Note:** While examples may compile on other platforms, official guides, build scripts, and tested installers in this repo target **Linux** only.  
 
 [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-lite-component.html  
 [2]: https://aws.amazon.com/blogs/iot/aws-iot-greengrass-nucleus-lite-revolutionizing-edge-computing-on-resource-constrained-devices/
