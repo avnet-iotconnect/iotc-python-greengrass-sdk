@@ -4,7 +4,7 @@ import time
 from dataclasses import dataclass, asdict
 
 from avnet.iotconnect.sdk.sdklib.error import ClientError
-from avnet.iotconnect.sdk.sdklib.mqtt import C2dOta, C2dAck
+from avnet.iotconnect.sdk.sdklib.mqtt import C2dAck
 
 from avnet.iotconnect.sdk.greengrass import Client, C2dCommand, TelemetryRecord, Callbacks
 from avnet.iotconnect.sdk.greengrass import __version__ as SDK_VERSION

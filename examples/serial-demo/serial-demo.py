@@ -13,7 +13,7 @@ from avnet.iotconnect.sdk.greengrass import __version__ as SDK_VERSION
 class SerialPort:
     def __init__(
             self,
-            port: str = 'dev/ttyACM0',
+            port: str = '/dev/ttyACM0',
             baudrate: int = 115200,
             parity: str = serial.PARITY_NONE,
             stopbits: float = serial.STOPBITS_ONE,
@@ -35,7 +35,8 @@ class SerialPort:
                 bytesize=self.bytesize,
                 timeout=2
             )
-            ser.open()
+            if not ser.is_open:
+                ser.open()
             return ser
         except serial.SerialException as e:
             if not quiet:
@@ -43,12 +44,14 @@ class SerialPort:
             return None
 
 
-s: Optional[serial.Serial] = SerialPort().open(quiet=False) # (loud for now) with default args like dev/ttyACM0 at 115200 baudrate
+s: Optional[serial.Serial] = SerialPort().open(quiet=False) # (loud for now) with default args like /dev/ttyACM0 at 115200 baudrate
 
 def send_port_data():
     global s
     try:
-        if s is not None and s.is_open:
+        if s is not None:
+            if not s.is_open:
+                s.open()
             while s.in_waiting > 0:
                 line = s.readline().decode('utf-8').rstrip()
                 if line is not None and len(line) > 0:
@@ -81,6 +84,7 @@ def on_command(msg: C2dCommand):
                     pass
                 s = None
             s = SerialPort(port, baudrate).open()
+            c.send_command_ack(msg, C2dAck.CMD_SUCCESS_WITH_ACK, f"Port {port} opened successfully")
         else:
             c.send_command_ack(msg, C2dAck.CMD_FAILED, "Expected 2 arguments")
             print("Expected two command arguments, but got", len(msg.command_args))
