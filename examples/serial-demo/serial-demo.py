@@ -83,8 +83,16 @@ def on_command(msg: C2dCommand):
                 except RuntimeError:
                     pass
                 s = None
-            s = SerialPort(port, baudrate).open()
-            c.send_command_ack(msg, C2dAck.CMD_SUCCESS_WITH_ACK, f"Port {port} opened successfully")
+            try:
+                s = SerialPort(port, baudrate).open()
+                if s is None or not s.is_open:
+                    c.send_command_ack(msg, C2dAck.CMD_FAILED, f'Failed to open port "{port}"')
+                else:
+                    c.send_command_ack(msg, C2dAck.CMD_SUCCESS_WITH_ACK,f'Port "{port}" opened' )
+            except serial.SerialException as e:
+                print(f"Serial Error: {e}")
+                c.send_command_ack(msg, C2dAck.CMD_FAILED, f'Failed to open port "{port}"')
+
         else:
             c.send_command_ack(msg, C2dAck.CMD_FAILED, "Expected 2 arguments")
             print("Expected two command arguments, but got", len(msg.command_args))
@@ -98,6 +106,7 @@ def on_command(msg: C2dCommand):
             if s is not None and s.is_open:
                 s.write(command_str.encode('utf-8'))
                 s.write('\n'.encode('utf-8'))
+                c.send_command_ack(msg, C2dAck.CMD_SUCCESS_WITH_ACK, "Data sent")
             else:
                 c.send_command_ack(msg, C2dAck.CMD_FAILED, "Port is not open")
                 print(f"Error: Port is not open!")

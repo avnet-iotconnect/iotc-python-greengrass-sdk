@@ -258,6 +258,13 @@
                     "unit": "%"
                 }
             ]
+        },
+        {
+            "name": "serial_data",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
         }
     ],
     "commands": [
