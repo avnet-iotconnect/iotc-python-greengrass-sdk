@@ -53,6 +53,5 @@ Manifests:
           bash -x {artifacts:decompressedPath}/dhm-demo*/wrapper/component-install.sh
       run:
         RequiresPrivilege: false
-        Timeout: 120
         Script: |
           bash -x {artifacts:decompressedPath}/dhm-demo*/wrapper/component-run.sh

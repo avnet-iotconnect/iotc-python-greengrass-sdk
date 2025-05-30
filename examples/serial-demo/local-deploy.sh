@@ -17,7 +17,7 @@ sudo -E /greengrass/v2/bin/greengrass-cli \
   deployment create \
   --recipeDir greengrass-build/recipes \
   --artifactDir greengrass-build/artifacts \
-  --merge "io.iotconnect.example.IotConnectSdkSerialDemo=0.1.0"
+  --merge "io.iotconnect.example.IotConnectSdkSerialDemo=0.1.1"
 
 exit 0
 
