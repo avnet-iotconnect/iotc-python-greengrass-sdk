@@ -1,19 +1,24 @@
 # Introduction
-This project is the Avnet /IOTCONNECT AWS Greengrass SDK intended for 
-the /IOTCONNECT Greengrass devices and Components based on Python.
 
-The project is based on the 
-[/IOTCONNECT Python Library](https://github.com/avnet-iotconnect/iotc-python-lib).
+This repository provides the Avnet /IOTCONNECT AWS Greengrass SDK for building **Python-based Greengrass Components**, supporting both **AWS IoT Greengrass Nucleus Lite** 
+(the C-based, ultra-lightweight edge runtime) and **AWS IoT Greengrass Nucleus Classic** (the full-featured Java-based runtime) ([Developer Guide][1], [AWS IoT Blog][2]).
 
-While the example Components and the SDK can be built on other OS-es, 
-only Linux is supported for guides, along with the provided build scripts and instructions.
+With this SDK you can:
+- **Use the provided example Components** to send telemetry, receive commands, and handle OTA updates (OTA push support coming soon)
+- **Write your own Python Components** using the /IOTCONNECT 2.1 JSON protocol, with built-in helpers for `send_telemetry()`, command callbacks, and OTA lifecycle
+- **Deploy Components and Firmware** via the IoTConnect Web UI (Device Template → Component registration → Firmware = set of Components → Deployment)
+
+> **ℹ️ Note:** While examples may compile on other platforms, official guides, build scripts, and tested installers in this repo target **Linux** only.  
+
+[1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-lite-component.html  
+[2]: https://aws.amazon.com/blogs/iot/aws-iot-greengrass-nucleus-lite-revolutionizing-edge-computing-on-resource-constrained-devices/
 
 In order to run an /IOTCONNECT Greengrass Component using this SDK:
 1. An /IOTCONNECT Device Template will need to be created, 
 2. A Greengrass device will need to be created
 3. A Nucleus will need to be set up and running on that device.
 4. A Greengrass Component will need to built or downloaded.
-5. A Greengrass Component will need to be registered in your IoTConnect account.
+5. A Greengrass Component will need to be registered in your /IOTCONNECT account.
 6. A Firmware will need to be created, that defines which Components will be deployed to your Nucleus
 7. The Firmware will need to be deployed to your target device.
 
@@ -21,7 +26,7 @@ See this guide for details on how to complete each of the steps.
 
 # Creating The Device Template 
 
-Using the Sidebar menu in IoTConnect, Navigate to *Device -> Greengrass Device -> Template (bottom menu)*. 
+Using the Sidebar menu in /IOTCONNECT, Navigate to *Device -> Greengrass Device -> Template (bottom menu)*. 
 A Device Template that matches your application will need to be created. 
 If testing our [examples](examples), you can upload the 
 [common template JSON](examples/common/files/all-apps-device-template.json) 
