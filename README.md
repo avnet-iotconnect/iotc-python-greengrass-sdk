@@ -30,7 +30,7 @@ Using the Sidebar menu in /IOTCONNECT, Navigate to *Device -> Greengrass Device 
 A Device Template that matches your application will need to be created. 
 If testing our [examples](examples), you can upload the 
 [common template JSON](examples/common/files/all-apps-device-template.json) 
-that supports attributes and commands for both examples by clicking on the **Create Template**
+that supports attributes and commands for examples by clicking on the **Create Template**
 button and then the **Import** button. .
 
 # Creating The Device and Installing The Greengrass Nucleus
@@ -175,12 +175,27 @@ Once the device specific installer completes, The Greengrass Nucleus Lite should
 and the device should show up as **Connected** in /IOTCONNECT within a minute or so. 
 You can proceed to develop and/or deploy your greengrass Component.
 
+# About Component Examples
+
+We provide several Component examples with different sample use cases
+to help you get started with AWS Greengrass on /IOTCONNECT.
+
+See the README.md in corresponding example directories to learn more 
+about how each Component interacts with the SDK and /IOTCONNECT:
+* [Basic Demo](examples/basic-demo)
+* [Device Health Monitoring Demo](examples/dhm-demo) 
+* [Serial Port Demo](examples/serial-demo)
+
 # Deploying Pre-Built Components
 
 You can download the Pre-build Components and skip *Building The Example Components* step below.
 
-* Basic Demo: [iotc-gg-component-basic-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-1.0.0.zip)
-* Device Health Monitoring Demo: [iotc-gg-component-dhm-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-1.0.0.zip)
+* Basic Demo: 
+    [iotc-gg-component-basic-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-2.0.0.zip)
+* Device Health Monitoring Demo: 
+    [iotc-gg-component-dhm-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.0.0.zip)
+* Serial Port Demo:
+    [iotc-gg-component-dhm-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.0.0.zip)
 
 # Building The Example Components
 
@@ -258,7 +273,7 @@ The Firmware only defines which Components will be managed by a deployment, so t
 assuming you will always be deploying the same set of Components.
 
 You can search the Custom Components list for "Basic" or "Dhm" for example, depending on which Components you want to deploy.
-All of the available examples can be deployed to the same device as long as their Components have been previously registered.
+Each of the available examples can be deployed to the same device as long as their Components have been previously registered.
 
 Once the **Firmware** is created, we need to deploy it to your device. Click the **Deployment** button in the *Formware* section.
 

@@ -7,14 +7,14 @@ cd "$(dirname "$0")"
 ./build.sh "$@"
 
 sudo -E /greengrass/v2/bin/greengrass-cli \
-  component details --name "io.iotconnect.example.IotConnectSdkDhmDemo" | true
+  component details --name "io.iotconnect.example.IotConnectSdkSerialDemo" | true
 
 sudo -E /greengrass/v2/bin/greengrass-cli \
   deployment create \
-  --remove "io.iotconnect.example.IotConnectSdkDhmDemo" | true
+  --remove "io.iotconnect.example.IotConnectSdkSerialDemo" | true
 
 sudo -E /greengrass/v2/bin/greengrass-cli \
   deployment create \
   --recipeDir greengrass-build/recipes \
   --artifactDir greengrass-build/artifacts \
-  --merge "io.iotconnect.example.IotConnectSdkDhmDemo=2.0.0"
+  --merge "io.iotconnect.example.IotConnectSdkSerialDemo=2.0.0"

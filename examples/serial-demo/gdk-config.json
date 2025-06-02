@@ -1,13 +1,13 @@
 {
   "component": {
-    "io.iotconnect.example.IotConnectSdkBasicDemo": {
+    "io.iotconnect.example.IotConnectSdkSerialDemo": {
       "author": "Nik Markovic",
       "version": "2.0.0",
       "build": {
         "build_system": "zip"
       },
       "publish": {
-        "bucket": "iotc-basic-demo",
+        "bucket": "iotc-serial-demo",
         "region": "us-east-1"
       }
     }
