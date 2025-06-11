@@ -5,7 +5,7 @@
 RecipeFormatVersion: "2020-01-25"
 ComponentName: "{{COMPONENT_NAME}}"
 ComponentVersion: "{{COMPONENT_VERSION}}"
-ComponentDescription: "/IOTCONNECT Greengrass SDK Basic Demo."
+ComponentDescription: "/IOTCONNECT Basic Demo"
 ComponentPublisher: "{{COMPONENT_AUTHOR}}"
 ComponentConfiguration:
   DefaultConfiguration:

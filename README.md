@@ -248,8 +248,8 @@ on the right side of the Component entry.
 A few extra steps required before uploading your Component:
 - Rename your built Component zip in the greengrass-build directory to contain a unique version number. 
 For example, rename basic-demo.zip to basic-demo-1.0.0.zip.
-- Once you upload your Component, use the copy button on the right side panel with the files list 
-and apply it to the recipe.yaml URI section located in the greengrass-build directory. For example:
+- Once you upload your Component artifact, click the copy icon on the right side panel next to the artifact that
+was just upload, and edit recipe.yaml URI section located in the greengrass-build directory. For example:
 
 ```yaml
 ...
