@@ -84,6 +84,8 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 6. Select `Nucleus Lite` for the **Device Type**
 7. Click **Save & View**
 8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  This contains information about the device which will be used to configure the board in a future step.
+![copy_artifact_url](https://github.com/user-attachments/assets/66dc2000-0501-410e-afcb-82b105fce84c)
+
 
 ## 7. Download and Write the Image
 Avnet has created a pre-built image for the STM32MP135F-DK which can be directly written to the SD card provided with the board.  
