@@ -25,7 +25,8 @@
 11. [Resources](#11-resources)
 
 ## 1. Introduction
-This guide will walk through the steps to create and demonstrate a Device Health Monitoring application solution on the STM32MP135F-DK.  The solution utilizes the new AWS Greengrass Nucleus Lite. Avnet's /IOTCONNECT platform will also be used to streamline all actions that would otherwise be performed in the AWS Console.   
+This guide will walk through the steps to create and demonstrate a Device Health Monitoring application solution on the STM32MP135F-DK.  The solution utilizes the new AWS Greengrass Nucleus Lite. Avnet's /IOTCONNECT platform will also be used to streamline all actions that would otherwise be performed in the AWS Console. The main tasks that will be performed are as follows:  
+
 1. Create an /IOTCONNECT account
 2. Import an example **Device Template** in /IOTCONNECT
 3. Create a **Greengrass Device** in /IOTCONNECT
