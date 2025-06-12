@@ -83,7 +83,7 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 5. Select `ggsdkdemo` for the **Template**  
 6. Select `Nucleus Lite` for the **Device Type**
 7. Click **Save & View**
-8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  This contains information about the device which will be used to configure the board in a future step.
+8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  This contains information about the device which will be used to configure the board in a future step.  
 ![copy_artifact_url](https://github.com/user-attachments/assets/66dc2000-0501-410e-afcb-82b105fce84c)
 
 
