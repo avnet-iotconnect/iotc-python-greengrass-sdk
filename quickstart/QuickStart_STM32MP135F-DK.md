@@ -1,7 +1,4 @@
 # Simplifying AWS Greengrass Nucleus Lite deployments with /IOTCONNECT
-Here's a **linkable Table of Contents (TOC)** you can place at the top of your Markdown document. It uses anchor links that correspond to the section headings you've already defined.
-
-## Table of Contents
 
 1. [Introduction](#1-introduction)
 2. [Requirements](#2-requirements)
