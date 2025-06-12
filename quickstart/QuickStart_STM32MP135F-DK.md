@@ -1,9 +1,31 @@
 # Simplifying AWS Greengrass Nucleus Lite deployments with /IOTCONNECT
+Here's a **linkable Table of Contents (TOC)** you can place at the top of your Markdown document. It uses anchor links that correspond to the section headings you've already defined.
+
+## Table of Contents
+
 1. [Introduction](#1-introduction)
 2. [Requirements](#2-requirements)
+
+   * [Hardware](#hardware)
+   * [Software](#software)
 3. [Hardware Setup](#3-hardware-setup)
 4. [/IOTCONNECT: Cloud Account Setup](#4-iotconnect-cloud-account-setup)
+5. [/IOTCONNECT: Import the Device Template](#5-iotconnect-import-the-device-template)
+6. [/IOTCONNECT: Create the Greengrass Device](#6-iotconnect-create-the-greengrass-device)
+7. [Download and Write the Image](#7-download-and-write-the-image)
+8. [Configure the Device](#8-configure-the-device)
 
+   * [Obtain the IP Address](#obtain-the-ip-address)
+   * [Transfer the Device Information](#transfer-the-device-information)
+   * [Run the Setup Script](#run-the-setup-script)
+9. [Deploy the Pre-Built Component](#9-deploy-the-pre-built-component)
+
+   * [Load the Artifact](#load-the-artifact)
+   * [Update and Load the Recipe](#update-and-load-the-recipe)
+   * [Create Firmware](#create-firmware)
+   * [Deploy Firmware](#deploy-firmware)
+10. [Import a Dynamic Dashboard](#10-import-a-dynamic-dashboard)
+11. [Resources](#11-resources)
 
 ## 1. Introduction
 This guide will walk through the steps to create and demonstrate a Device Health Monitoring application solution on the STM32MP135F-DK.  The solution utilizes the new AWS Greengrass Nucleus Lite. Avnet's /IOTCONNECT platform will also be used streamline all actions that would otherwise be performed in the AWS Console.   
