@@ -126,7 +126,7 @@ bash device-setup.sh ~/STM32MP135F-bundles.zip
 
 ## 9. Deploy the Pre-Built Component
 To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware package that contains the artifact file and a recipe.
-* **Download** and **Extract** the *Device Health Monitoring Component*: [http://iotc-gg-component-dhm-demo-2.0.0.zip/](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.0.0.zip)
+* **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-dhm-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.0.0.zip)
 
 ### Load the Artifact
 1. In the /IOTCONNECT platform, click **Firmware** at the bottom of the screen, then click **Components** at the top.
