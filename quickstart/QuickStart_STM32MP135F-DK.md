@@ -156,7 +156,7 @@ The Firmware with the component is now deployed on the device.
 
 ## 10. Import a Dynamic Dashboard
 /IOTCONNECT Dynamic Dashboards are an easy way to visualize data and interact with edge devices.  
-* Download the *Device Health Monitoring* dashboard: [greengrass_nucleus lite_STM32MP135F_dashboard.json](greengrass_nucleus lite_STM32MP135F_dashboard.json)
+* Download the *Device Health Monitoring* dashboard: [greengrass_nucleus_lite_STM32MP135F_dashboard.json](greengrass_nucleus_lite_STM32MP135F_dashboard.json)
 
 * Switch back to the /IOTCONNECT browser window and verify the device status is displaying as `Connected`
 * **Click** `Create Dashboard` from the top of the page
