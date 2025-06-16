@@ -54,11 +54,8 @@ Make the following connections using the image below as reference:
 1. Connect an **Ethernet Cable** from your LAN (modem/router/switch) to the Ethernet connector labeled **#1**.
 2. Connect the **USB-C cable** from a 5V/2.4A power supply (could be your PC) to the PWR USB-C connector on the board, labeled **#2**.
 3. Connect the Micro-USB cable from your PC to the Micro-USB connector labeled **#3** on the reference image.
-See the reference image below for cable connections.
-<details>
-<summary>Reference Image with Connections</summary>
+See the reference image below for cable connections:  
 <img src="./media/stm32mp135F-dk_board_setup.png" width="600">
-</details>
 
 ## 4. /IOTCONNECT: Cloud Account Setup
 An /IOTCONNECT account with an AWS backend is required.  If you need to create an account, a free trial subscription is available.
