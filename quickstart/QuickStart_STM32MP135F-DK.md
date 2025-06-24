@@ -1,4 +1,5 @@
 # STM32MP135F-DK AWS IoT Greengrass nucleus lite QuickStart
+<img src="https://github.com/avnet-iotconnect/iotc-python-greengrass-sdk/blob/main/quickstart/media/STM32MP135x-DK.png" width="300" />  
 
 1. [Introduction](#1-introduction)
 2. [Requirements](#2-requirements)
