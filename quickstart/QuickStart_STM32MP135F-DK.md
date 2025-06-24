@@ -1,4 +1,4 @@
-# Simplifying AWS Greengrass Nucleus Lite deployments with /IOTCONNECT
+# STM32MP135F-DK AWS IoT Greengrass nucleus lite QuickStart
 
 1. [Introduction](#1-introduction)
 2. [Requirements](#2-requirements)
@@ -25,14 +25,14 @@
 11. [Resources](#11-resources)
 
 ## 1. Introduction
-This guide will walk through the steps to create and demonstrate a Device Health Monitoring application solution on the STM32MP135F-DK.  The solution utilizes the new AWS Greengrass Nucleus Lite. Avnet's /IOTCONNECT platform will also be used to streamline all actions that would otherwise be performed in the AWS Console. The main tasks that will be performed are as follows:  
+This guide will walk through the steps to create and demonstrate a Device Health Monitoring application solution on the STM32MP135F-DK.  The solution utilizes the new AWS Greengrass nucleus lite. Avnet's /IOTCONNECT platform will also be used to streamline all actions that would otherwise be performed in the AWS Console. The main tasks that will be performed are as follows:  
 
 1. Create an /IOTCONNECT account
 2. Import an example **Device Template** in /IOTCONNECT
 3. Create a **Greengrass Device** in /IOTCONNECT
-4. Setup **Nucleus Lite** on the target device
+4. Setup **nucleus lite** on the target device
 5. Download and Register a pre-built **Greengrass Component** in /IOTCONNECT
-6. Create a **Firmware** package that defines the **Greengrass Components** deployed to the Nucleus
+6. Create a **Firmware** package that defines the **Greengrass Components** deployed to the nucleus
 7. Deploy the **Firmware** to the target device
 8. View live data and interact with the target device using **Dynamic Dashboards** in /IOTCONNECT
 
@@ -51,9 +51,9 @@ This guide has been written and tested to work on a Windows 10/11 PC to reach th
 
 ## 3. Hardware Setup
 Make the following connections using the image below as reference:
-1. Connect an **Ethernet Cable** from your LAN (modem/router/switch) to the Ethernet connector labeled **#1**.
-2. Connect the **USB-C cable** from a 5V/2.4A power supply (could be your PC) to the PWR USB-C connector on the board, labeled **#2**.
-3. Connect the Micro-USB cable from your PC to the Micro-USB connector labeled **#3** on the reference image.
+1. Connectivity: Connect an **Ethernet Cable** from your LAN (modem/router/switch) to the Ethernet connector labeled **#1**.
+2. Power: Connect the **USB-C cable** from a 5V/2.4A power supply (could be your PC) to the PWR USB-C connector on the board, labeled **#2**.
+3. Debug: Connect the Micro-USB cable from your PC to the Micro-USB connector labeled **#3** on the reference image.
 See the reference image below for cable connections:  
 <img src="./media/stm32mp135F-dk_board_setup.png" width="600">
 
@@ -78,17 +78,25 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 3. Enter `STM32MP135F` for the **Unique ID** and **Device Name**  
 4. Select the **Entity** to put the device in (For new accounts, there is only one option)  
 5. Select `ggsdkdemo` for the **Template**  
-6. Select `Nucleus Lite` for the **Device Type**
+6. Select `nucleus lite` for the **Device Type**
 7. Click **Save & View**
 8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  This contains information about the device which will be used to configure the board in a future step.  
 ![copy_artifact_url](https://github.com/user-attachments/assets/66dc2000-0501-410e-afcb-82b105fce84c)
 
 
 ## 7. Download and Write the Image
-Avnet has created a pre-built image for the STM32MP135F-DK which can be directly written to the SD card provided with the board.  
+Avnet has created a pre-built image for the STM32MP135F-DK which can be directly written to the SD card provided with the board.
+>[!NOTE]
+> The image provided below is based on the ST StarterPackage version v6.0.0 for the STM32MP13 series. Please review [Section 6 of the ST StarterPackage Guide](https://wiki.st.com/stm32mpu/wiki/STM32MP13_Discovery_kits_-_Starter_Package) for more information on the binaries compatible with this development board.
 1. Download and unzip the image :  [stm32mp135f-dk-sdcard-6.6-yocto-scarthgap-mpu-v24.11.06.zip](https://downloads.iotconnect.io/partners/st/disk-images/stm32mp135f-dk/stm32mp135f-dk-sdcard-6.6-yocto-scarthgap-mpu-v24.11.06.zip)  
 2. Open Balena Etcher and Write the Image to the SD card
-3. Insert the SD card into the board and power it on
+3. Ensure the Boot Switches are set as follows:  
+   * BOOT0 = ON
+   * BOOT1 = OFF
+   * BOOT2 = ON
+   * (Bottom switch is not connected so either position is OK)
+![img](media/STM32MP135x-DKx_boot_switches_microSD_card.png)
+4. Insert the SD card into the board and power it on
 
 ## 8. Configure the Device
 Configuration of the device is mostly automated by using a device setup script, but first the device information bundle needs to be transferred to the board.
