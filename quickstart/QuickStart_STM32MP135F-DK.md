@@ -120,7 +120,7 @@ scp STM32MP135F-bundles.zip root@x.x.x.x:
 ```
 
 ### Run the Setup Script
-* If not already open, launch TeraTerm and connect to the board using the IP address obtained in the previous step.
+* If not already open, launch TeraTerm and connect to the board using the serial interface.
 * Copy/Paste the following command to download the setup script and execute it.
 ```commandline
 wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-sdk/refs/heads/main/installer/openstlinux/device-setup.sh -O device-setup.sh
@@ -144,7 +144,7 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 
 ### Update and Load the Recipe 
 1. Open the `<your working directory>\dhm-demo\greengrass-build\recipes\recipe.yaml` file a in a text editor.
-2. Navigate to the *Manifests* -> *Artifacts* ->  *Uri* section (line 33) and paste in the file path coped from the previous step.
+2. Navigate to the *Manifests* -> *Artifacts* ->  *Uri* section (line 33) and paste in the file path copied from the previous step.
 3. **Save** and **Close** the file.
 4. Return to the /IOTCONNECT window and upload the `recipe.yaml` to the *Recipe* field.
 5. Click **Save**
@@ -157,7 +157,7 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 5. Click **Save**
 
 ### Deploy Firmware
-1. **Click** *Deploymnets*
+1. **Click** *Deployments*
 2. Add a *Name* and select each item in the drop-downs
 3. **Click** *Deploy*
 
