@@ -105,20 +105,20 @@ The steps required are as follows:
 3. Run the setup script
 
 ### Obtain the IP Address
-There are a variety of ways to obtain the IP Address, but the most common are:
-* Reference the DHCP table in your modem/router
 * Connect to the board using a serial terminal, such as TeraTerm, and use the command `ifconfig`
+* The IP Address will listed next to the interface `end0`
+* Leave the serial terminal window open for a future step
 
 ### Transfer the Device Information
 * Navigate to the directory where the device bundle file ("bundles.zip") was saved.
-* **Right-Click** and select *Open in Terminal**
+* **Right-Click** and select **Open in Terminal**
 * Copy/Paste the following command replacing x.x.x.x with the IP address of the board
 ```commandline
 scp bundles.zip root@x.x.x.x:
 ```
 
 ### Run the Setup Script
-* If not already open, launch TeraTerm and connect to the board using the serial interface.
+* Return to the TeraTerm window.
 * Copy/Paste the following command to download the setup script and execute it.
 ```commandline
 wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-sdk/refs/heads/main/installer/openstlinux/device-setup.sh -O device-setup.sh
@@ -150,7 +150,7 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 
 ### Create Firmware
 1. Return to the **Firmware** tab and click **Create Firmware**
-2. Enter a *Name*
+2. Enter a *Name* such as `MyDHMdemo`
 3. Select the `ggsdkdemo` Template
 4. Select the **Custom Component** in the drop-down
 5. Click **Save**
