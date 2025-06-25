@@ -158,8 +158,9 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 
 ### Deploy Firmware
 1. **Click** *Deployments*
-2. Add a *Name* and select each item in the drop-downs
-3. **Click** *Deploy*
+2. Add a *Name* and select each item in the drop-downs (there will only be one option for each)
+3. Ensure you tick the box under "Components" and pick the version `2.0.0`
+4. **Click** *Deploy*
 
 The Firmware with the component is now deployed on the device.
 
