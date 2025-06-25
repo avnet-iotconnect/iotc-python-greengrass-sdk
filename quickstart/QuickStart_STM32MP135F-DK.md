@@ -76,12 +76,12 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 ## 6. /IOTCONNECT: Create the Greengrass Device
 1. At the bottom of the /IOTCONNECT GUI, click the **Devices**
 2. At the top-right, click **Create Device**  
-3. Enter `STM32MP135F` for the **Unique ID** and **Device Name**  
+3. Enter `STM32MP135Fdemo` for the **Unique ID** and **Device Name**  
 4. Select the **Entity** to put the device in (For new accounts, there is only one option)  
 5. Select `ggsdkdemo` for the **Template**  
 6. Select `nucleus lite` for the **Device Type**
 7. Click **Save & View**
-8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  This contains information about the device which will be used to configure the board in a future step.  
+8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  Save this file as `bundles.zip`.  This contains information about the device which will be used to configure the board in a future step.
 
 ## 7. Download and Write the Image
 Avnet has created a pre-built image for the STM32MP135F-DK which can be directly written to the SD card provided with the board.
@@ -93,7 +93,7 @@ Avnet has created a pre-built image for the STM32MP135F-DK which can be directly
    * BOOT0 = ON
    * BOOT1 = OFF
    * BOOT2 = ON
-   * (Bottom switch is not connected so either position is OK)
+   * (Bottom switch is not connected so either position is OK)  
 ![img](media/STM32MP135x-DKx_boot_switches_microSD_card.png)
 4. Insert the SD card into the board and power it on
 
@@ -110,11 +110,11 @@ There are a variety of ways to obtain the IP Address, but the most common are:
 * Connect to the board using a serial terminal, such as TeraTerm, and use the command `ifconfig`
 
 ### Transfer the Device Information
-* Navigate to the directory where the device bundle file ("STM32MP135F-bundles.zip") was saved.
+* Navigate to the directory where the device bundle file ("bundles.zip") was saved.
 * **Right-Click** and select *Open in Terminal**
 * Copy/Paste the following command replacing x.x.x.x with the IP address of the board
 ```commandline
-scp STM32MP135F-bundles.zip root@x.x.x.x:
+scp bundles.zip root@x.x.x.x:
 ```
 
 ### Run the Setup Script
@@ -128,7 +128,7 @@ wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-s
 
 * Once the script has completed, use the following command to configure the device information:
 ```bash
-bash device-setup.sh ~/STM32MP135F-bundles.zip
+bash device-setup.sh ~/bundles.zip
 ```
 
 ## 9. Deploy the Pre-Built Component
