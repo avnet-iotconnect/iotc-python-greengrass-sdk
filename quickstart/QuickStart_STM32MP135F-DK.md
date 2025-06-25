@@ -82,8 +82,6 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 6. Select `nucleus lite` for the **Device Type**
 7. Click **Save & View**
 8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  This contains information about the device which will be used to configure the board in a future step.  
-![copy_artifact_url](https://github.com/user-attachments/assets/66dc2000-0501-410e-afcb-82b105fce84c)
-
 
 ## 7. Download and Write the Image
 Avnet has created a pre-built image for the STM32MP135F-DK which can be directly written to the SD card provided with the board.
@@ -140,7 +138,8 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 ### Load the Artifact
 1. In the /IOTCONNECT platform, click **Firmware** at the bottom of the screen, then click **Components** at the top.
 2. Select the artifact file ("dhm-demo-2.0.0.zip") from the previously extracted component archive here:  `<your working directory>\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\2.0.0\`
-3. Ensure the artifact file is listed in the *Artifact List* and click the copy icon to the left of the filename. This will be used in the next step.
+3. Ensure the artifact file is listed in the *Artifact List* and click the copy icon to the left of the filename. This will be used in the next step.  
+![copy_artifact_url](https://github.com/user-attachments/assets/66dc2000-0501-410e-afcb-82b105fce84c)
 
 ### Update and Load the Recipe 
 1. Open the `<your working directory>\dhm-demo\greengrass-build\recipes\recipe.yaml` file a in a text editor.
