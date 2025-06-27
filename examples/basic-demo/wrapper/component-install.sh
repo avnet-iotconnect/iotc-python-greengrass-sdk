@@ -29,9 +29,12 @@ fi
 
 python3_opts=
 if [[ -d /var/cache/iotconnect/wheelhouse ]]; then
-     python3_opts=--find-links=file:///var/cache/iotconnect/wheelhouse
+     python3_opts="--find-links=file:///var/cache/iotconnect/wheelhouse" 
+     python3_opts+=" --constraint=/var/cache/iotconnect/wheelhouse/constraints.txt"
 fi
 
+
+##########################
 # for others, let's not have the warning printed for non-existing dir
 # shellcheck disable=SC2086
 python3 -m pip install $python3_opts -r requirements.txt
