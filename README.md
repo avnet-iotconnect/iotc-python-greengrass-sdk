@@ -175,7 +175,7 @@ Once the device specific installer completes, The Greengrass Nucleus Lite should
 and the device should show up as **Connected** in /IOTCONNECT within a minute or so. 
 You can proceed to develop and/or deploy your greengrass Component.
 
-# About Component Examples
+# About Example Components
 
 We provide several Component examples with different sample use cases
 to help you get started with AWS Greengrass on /IOTCONNECT.
@@ -186,46 +186,48 @@ about how each Component interacts with the SDK and /IOTCONNECT:
 * [Device Health Monitoring Demo](examples/dhm-demo) 
 * [Serial Port Demo](examples/serial-demo)
 
-# Deploying Pre-Built Components
+# Download Pre-Built Components
 
-You can download the Pre-build Components and skip *Building The Example Components* step below.
+You can download the pre-built Components (ready to deploy) and skip *Modifying and Building The Example Components* step below.
 
 * Basic Demo: 
-    [iotc-gg-component-basic-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-2.0.0.zip)
+    [iotc-gg-component-basic-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-2.1.0.zip)
 * Device Health Monitoring Demo: 
-    [iotc-gg-component-dhm-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.0.0.zip)
+    [iotc-gg-component-dhm-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.1.0.zip)
 * Serial Port Demo:
-    [iotc-gg-component-dhm-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.0.0.zip)
+    [iotc-gg-component-dhm-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-serial-demo-2.1.0.zip)
 
-# Building The Example Components
+# Modifying and Building The Example Components
 
-For Component reference implementations, see [examples/basic-demo](examples/basic-demo).
+If you want to modify an example Component instead of using a fully pre-built version, you will need to clone this repo to your host PC where you will make your desired changes.
 
-To set up a Component package and recipe, first execute the build.sh script for your specific Component located
-in the specific example's root directory.
+Navigate within the cloned repo to the ```/examples``` directory, and then to the demo that you wish to modify.
 
-There are two ways to build the example Components:
-* With your CPID and Environment specified.
-* With default configuration.
+Make your modifications to the files as needed, and update the version numbers in ```gdk-config.json``` as well as ```local-deploy.sh``` to be unique to your new modified version.
 
-It is recommended to use the first option, and before building or deploying specify:
+>[!TIP]
+> For example, if the current version of the demo in this repo is ```2.1.0```, it is recommended to make your modified versions ```2.1.1``` and then ```2.1.2```, etc.
+
+After all of your modifications are saved, enter your IoTConnect CPID and Environment as shown here:
 
 ```shell
 export IOTC_ENV=YourENV
 export IOTC_CPID=YourCPID
 ```
 
-These values can be obtained from **Settings -> Key Vault** on the /IOTCONNECT Web UI. 
+>[!NOTE]
+>Your CPID and Environment values can be obtained from **Settings -> Key Vault** on the /IOTCONNECT Web UI. 
 
 At this point in time, it is not strictly necessary to provide these configuration values, and the SDK 
 will use the information provided by the Greengrass environment to guess the MQTT topics that 
-will be used to communicate to /IOTCONNECT, but in the future, 
-more advanced SDK features may require this.
+will be used to communicate to /IOTCONNECT, but in the future, more advanced SDK features may require this.
 
 The build script will install **gdk** locally and build your Component such that 
 the provided CPID and Environment values will be injected into the recipe.yaml.
 
-# Deploying The Example Components
+Now you can execute ```build.sh``` (may require sudo privileges) to build your new Component version.
+
+# Deploying Components
 
 This guide will summarize some of the steps to deploy your Components with /IOTCONNECT, 
 but for more details and a guide with screenshots, please refer to the 
@@ -245,10 +247,10 @@ Click the **Components** button in the *Firmware* section and either to register
 OR locate your existing Component and *Upgrade* it by clicking the **Upgrade** button 
 on the right side of the Component entry.
 
-A few extra steps required before uploading your Component:
-- Rename your built Component zip in the greengrass-build directory to contain a unique version number. 
-For example, rename basic-demo.zip to basic-demo-1.0.0.zip.
-- Once you upload your Component artifact, click the copy icon on the right side panel next to the artifact that
+A few extra steps are required before uploading your Component:
+- If you built the component instead of using the pre-built option, rename your built Component zip in the ```greengrass-build``` directory to contain the version number that you entered into your files before you built. 
+For example, rename basic-demo.zip to basic-demo-1.0.0.zip. The pre-built downloadable Components already have this.
+- Once you upload your Component artifact (for example called ```basic-demo-2.1.0.zip```), click the copy icon on the right side panel next to the artifact that
 was just upload, and edit recipe.yaml URI section located in the greengrass-build directory. For example:
 
 ```yaml
