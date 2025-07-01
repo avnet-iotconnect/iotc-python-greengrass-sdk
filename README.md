@@ -22,7 +22,11 @@ In order to run an /IOTCONNECT Greengrass Component using this SDK:
 6. A Firmware will need to be created, that defines which Components will be deployed to your Nucleus
 7. The Firmware will need to be deployed to your target device.
 
-See this guide for details on how to complete each of the steps.
+# Simplified QuickStart Guide(s)
+The guides below walk through each step in details.
+* [STM32MP135F-DK](quickstart/QuickStart_STM32MP135F-DK.md)
+
+Follow the guide below for details on how to complete each step for other target boards.
 
 # Creating The Device Template 
 
