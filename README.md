@@ -31,7 +31,7 @@ A Device Template that matches your application will need to be created.
 If testing our [examples](examples), you can upload the 
 [common template JSON](examples/common/files/all-apps-device-template.json) 
 that supports attributes and commands for examples by clicking on the **Create Template**
-button and then the **Import** button. .
+button and then the **Import** button.
 
 # Creating The Device and Installing The Greengrass Nucleus
 
@@ -68,7 +68,7 @@ bash device-setup.sh ~/my-device-bundle.zip
 
 On MP1 devices The /IOTCONNECT Greengrass SDK requires the awsiotsdk as a dependency, which requires awscli, 
 which needs to be natively compiled while being installed. In order to natively compile, 
-such Python packages certain tools need to present which are not available on the image provided 
+such Python packages certain tools need to be present which are not available on the image provided 
 by the factory, and hence require an image upgrade and along other steps laid out here that will 
 upgrade the system tools and pre-compile the awsiotsdk dependencies.
 
@@ -85,7 +85,7 @@ The overall process with STM32CubeProgrammer is fairly complex and can be length
 As an advanced but faster alternative, we suggest to explore the option of downloading the starter package, 
 and running the *create_sdcard_from_flashlayout.sh* utility instead in the scripts directory
 of the package in order to create an SD card image. 
-This SD card image can be then flashed onto the SD card with the *dd* 
+This SD card image can then be flashed onto the SD card with the *dd* 
 linux utility, Rufus, Balena Etcher and similar on other OS-es.
 
 # Device Setup
@@ -188,7 +188,7 @@ about how each Component interacts with the SDK and /IOTCONNECT:
 
 # Download Pre-Built Components
 
-You can download the pre-built Components (ready to deploy) and skip *Modifying and Building The Example Components* step below.
+You can download the pre-built Components (ready to deploy) and skip the *Modifying and Building The Example Components* step below.
 
 * Basic Demo: 
     [iotc-gg-component-basic-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-2.1.0.zip)
@@ -288,10 +288,8 @@ Telemetry data should start appearing after several minutes, and you can start s
 
 To learn more about AWS IoT Greengrass, visit the [AWS IoT Greengrass Documentation](https://docs.aws.amazon.com/greengrass/).
 
-Aside from the Component [examples](examples), if you wish to  learn more about how to send telemetry, 
-or receive commands, refer to the
-[/IOTCONNECT Python Lite SDK](https://github.com/avnet-iotconnect/iotc-python-sdk-lite) examples,
-as. The /IOTCONNECT Python Lite SDK client interface closely matches that of this /IOTCONNECT Greengrass SDK Client.
+Aside from the Component [examples](examples), if you wish to  learn more about how to send telemetry or receive commands, refer to the
+[/IOTCONNECT Python Lite SDK](https://github.com/avnet-iotconnect/iotc-python-sdk-lite) examples. The /IOTCONNECT Python Lite SDK client interface closely matches that of this /IOTCONNECT Greengrass SDK Client.
 
 It is recommended that you get familiar with building and deploying the Basic Example before proceeding to create 
 your own component.
@@ -329,7 +327,7 @@ If making changes to the SDK itself or needing to ship custom python packages, s
 behavior in ```build.sh```.
 
 Once you have tested your Component or changes on a local Nucleus, the Component code 
-should be easier troubleshoot.
+should be easier to troubleshoot.
 
 # Licensing
 
