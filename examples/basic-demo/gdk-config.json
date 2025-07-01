@@ -2,7 +2,7 @@
   "component": {
     "io.iotconnect.example.IotConnectSdkBasicDemo": {
       "author": "Nik Markovic",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "build": {
         "build_system": "zip"
       },
