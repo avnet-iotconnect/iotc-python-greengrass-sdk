@@ -76,12 +76,14 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 ## 6. /IOTCONNECT: Create the Greengrass Device
 1. At the bottom of the /IOTCONNECT GUI, click the **Devices**
 2. At the top-right, click **Create Device**  
+![img](media/iotc_create_device.png)  
 3. Enter `STM32MP135Fdemo` for the **Unique ID** and **Device Name**  
 4. Select the **Entity** to put the device in (For new accounts, there is only one option)  
 5. Select `ggsdkdemo` for the **Template**  
 6. Select `nucleus lite` for the **Device Type**
 7. Click **Save & View**
 8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  Save this file as `bundles.zip`.  This contains information about the device which will be used to configure the board in a future step.
+![img](media/iotc_device_bundle.png)  
 
 ## 7. Download and Write the Image
 Avnet has created a pre-built image for the STM32MP135F-DK which can be directly written to the SD card provided with the board.
@@ -150,9 +152,11 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 
 ### Create Firmware
 1. Return to the **Firmware** tab and click **Create Firmware**
+![img](media/iotc_firmware.png)  
 2. Enter a *Name* such as `MyDHMdemo`
 3. Select the `ggsdkdemo` Template
 4. Select the **Custom Component** in the drop-down
+![img](media/iotc_create_firmware.png)  
 5. Click **Save**
 
 ### Deploy Firmware
