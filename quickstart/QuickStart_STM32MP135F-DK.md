@@ -135,11 +135,11 @@ bash device-setup.sh ~/bundles.zip
 
 ## 9. Deploy the Pre-Built Component
 To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware package that contains the artifact file and a recipe.
-* **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-dhm-demo-2.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.0.0.zip)
+* **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-dhm-demo-2.1.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.1.0.zip)
 
 ### Load the Artifact
 1. In the /IOTCONNECT platform, click **Firmware** at the bottom of the screen, then click **Components** at the top.
-2. Select the artifact file ("dhm-demo-2.0.0.zip") from the previously extracted component archive here:  `<your working directory>\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\2.0.0\`
+2. Select the artifact file ("dhm-demo-2.1.0.zip") from the previously extracted component archive here:  `<your working directory>\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\2.0.0\`
 3. Ensure the artifact file is listed in the *Artifact List* and click the copy icon to the left of the filename. This will be used in the next step.  
 ![copy_artifact_url](https://github.com/user-attachments/assets/66dc2000-0501-410e-afcb-82b105fce84c)
 
@@ -162,7 +162,7 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 ### Deploy Firmware
 1. **Click** *Deployments*
 2. Add a *Name* and select each item in the drop-downs (there will only be one option for each)
-3. Ensure you tick the box under "Components" and pick the version `2.0.0`
+3. Ensure you tick the box under "Components" and pick the version `2.1.0`
 4. **Click** *Deploy*
 
 The Firmware with the component is now deployed on the device.
