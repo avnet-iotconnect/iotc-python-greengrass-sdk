@@ -95,7 +95,7 @@ Avnet has created a pre-built image for the STM32MP135F-DK which can be directly
    * BOOT0 = ON
    * BOOT1 = OFF
    * BOOT2 = ON
-   * (Bottom switch is not connected so either position is OK)  
+   * BOOT3 = ON or OFF (switch is not connected to PCB)  
 ![img](media/STM32MP135x-DKx_boot_switches_microSD_card.png)
 4. Insert the SD card into the board and power it on
 
