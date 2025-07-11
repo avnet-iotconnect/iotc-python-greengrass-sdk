@@ -125,13 +125,13 @@ scp bundles.zip root@x.x.x.x:
 ```commandline
 wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-sdk/refs/heads/main/installer/openstlinux/device-setup.sh -O device-setup.sh
 ```
-> [!NOTE]
-> This script will set up the development environment and precompile Python packages and may take around 7 minutes.
 
 * Once the script has completed, use the following command to configure the device information:
 ```bash
 bash device-setup.sh ~/bundles.zip
 ```
+> [!NOTE]
+> This script will set up the development environment and precompile Python packages and may take around 7 minutes.
 
 ## 9. Deploy the Pre-Built Component
 To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware package that contains the artifact file and a recipe.
