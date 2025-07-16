@@ -340,8 +340,8 @@ the following commands are required to ensure that the installer can safely run 
 
 ```bash
 systemctl stop greengrass-lite.target
-systemclt disable greengrass-lite.target
-rm -rf /var/lib/greengras
+systemctl disable greengrass-lite.target
+rm -rf /var/lib/greengrass
 userdel ggcore
 userdel gg_component
 ```
