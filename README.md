@@ -332,6 +332,20 @@ behavior in ```build.sh```.
 Once you have tested your Component or changes on a local Nucleus, the Component code 
 should be easier to troubleshoot.
 
+# Cleaning Up
+
+If it is needed to remove greeenras-lite or if needing to re-run the GGLite installer again 
+in order to use a diffeent device name,
+the following commands are required to ensure that the installer can safely run again:
+
+```bash
+systemctl stop greengrass-lite.target
+systemclt disable greengrass-lite.target
+rm -rf /var/lib/greengras
+userdel ggcore
+userdel gg_component
+```
+
 # Licensing
 
 This python package is distributed under the [MIT License](LICENSE.md).
