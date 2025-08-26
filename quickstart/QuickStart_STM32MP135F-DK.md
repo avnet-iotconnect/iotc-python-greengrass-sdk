@@ -82,7 +82,7 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 5. Select `ggsdkdemo` for the **Template**  
 6. Select `nucleus lite` for the **Device Type**
 7. Click **Save & View**
-8. Download the "Device Bundle" by clicking the icon in the upper right of the device page.  Save this file as `bundles.zip`.  This contains information about the device which will be used to configure the board in a future step.
+8. Download the "Connection Kit" by clicking the icon in the upper right of the device page.  Save this file as `connectionKit.zip`.  This contains information about the device which will be used to configure the board in a future step.
 ![img](media/iotc_device_bundle.png)  
 
 ## 7. Download and Write the Image
@@ -112,11 +112,11 @@ The steps required are as follows:
 * Leave the serial terminal window open for a future step
 
 ### Transfer the Device Information
-* Navigate to the directory where the device bundle file ("bundles.zip") was saved.
+* Navigate to the directory where the Connection Kit ("connectionKit.zip") was saved.
 * **Right-Click** and select **Open in Terminal**
 * Copy/Paste the following command replacing x.x.x.x with the IP address of the board
 ```commandline
-scp bundles.zip root@x.x.x.x:
+scp connectionKit.zip root@x.x.x.x:
 ```
 
 ### Run the Setup Script
