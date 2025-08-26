@@ -128,7 +128,7 @@ wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-s
 
 * Once the script has completed, use the following command to configure the device information:
 ```bash
-bash device-setup.sh ~/bundles.zip
+bash device-setup.sh ~/connectionKit.zip
 ```
 > [!NOTE]
 > This script will set up the development environment and precompile Python packages and may take around 7 minutes.
