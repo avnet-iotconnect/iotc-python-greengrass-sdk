@@ -80,7 +80,7 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 3. Enter `STM32MP135Fdemo` for the **Unique ID** and **Device Name**  
 4. Select the **Entity** to put the device in (For new accounts, there is only one option)  
 5. Select `ggsdkdemo` for the **Template**  
-6. Select `nucleus lite` for the **Device Type**
+6. Select `Nucleus Lite` for the **Device Type**
 7. Click **Save & View**
 8. Download the "Connection Kit" by clicking the icon in the upper right of the device page.  Save this file as `connectionKit.zip`.  This contains information about the device which will be used to configure the board in a future step.
 ![img](media/iotc_device_bundle.png)  
@@ -137,21 +137,16 @@ bash device-setup.sh ~/connectionKit.zip
 To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware package that contains the artifact file and a recipe.
 * **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-dhm-demo-2.1.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.1.0.zip)
 
-### Load the Artifact
+### Load the Recipe
 1. In the /IOTCONNECT platform, click **Package** at the bottom of the screen, then click **Components** at the top.
-2. In the "Create Component" box, browse for the artifact file ("dhm-demo-2.1.0.zip") from the previously extracted component archive here:  `<your working directory>\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\2.1.0\`
-3. Ensure the artifact file is listed in the *Artifact List* and click the copy icon to the left of the filename. This will be used in the next step.  
-![copy_artifact_url](https://github.com/user-attachments/assets/66dc2000-0501-410e-afcb-82b105fce84c)
+2. In the "Create Component" box, browse for the recipe file ("recipe.yaml") from the previously extracted component archive here:  `<your working directory>\iotc-gg-component-dhm-demo-2.1.0\dhm-demo\greengrass-build\recipes\recipe.yaml`
 
-### Update and Load the Recipe 
-1. Open the `<your working directory>\dhm-demo\greengrass-build\recipes\recipe.yaml` file a in a text editor.
-2. Navigate to the *Manifests* -> *Artifacts* ->  *Uri* section (line 33) and paste in the file path copied from the previous step.
-3. **Save** and **Close** the file.
-4. Return to the /IOTCONNECT window and upload the `recipe.yaml` to the *Recipe* field.
-5. Click **Save**
+### Load the Artifact 
+1. Click the icon to the right of "dhm-demo.zip" and navigate to the dhm-demo.zip from the previously extracted archive here: `<your working directory>\iotc-gg-component-dhm-demo-2.1.0\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\2.1.0\dhm-demo.zip`
+2. Click **Save**
 
-### Create Firmware
-1. Return to the **Firmware** tab and click **Create Firmware**
+### Create the Package
+1. Return to the **Component** tab and click **Create Firmware**
 ![img](media/iotc_firmware.png)  
 2. Enter a *Name* such as `MyDHMdemo`
 3. Select the `ggsdkdemo` Template
