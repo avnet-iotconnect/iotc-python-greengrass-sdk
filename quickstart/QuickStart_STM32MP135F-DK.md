@@ -138,8 +138,8 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 * **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-dhm-demo-2.1.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.1.0.zip)
 
 ### Load the Artifact
-1. In the /IOTCONNECT platform, click **Firmware** at the bottom of the screen, then click **Components** at the top.
-2. Select the artifact file ("dhm-demo-2.1.0.zip") from the previously extracted component archive here:  `<your working directory>\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\2.1.0\`
+1. In the /IOTCONNECT platform, click **Package** at the bottom of the screen, then click **Components** at the top.
+2. In the "Create Component" box, browse for the artifact file ("dhm-demo-2.1.0.zip") from the previously extracted component archive here:  `<your working directory>\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\2.1.0\`
 3. Ensure the artifact file is listed in the *Artifact List* and click the copy icon to the left of the filename. This will be used in the next step.  
 ![copy_artifact_url](https://github.com/user-attachments/assets/66dc2000-0501-410e-afcb-82b105fce84c)
 
