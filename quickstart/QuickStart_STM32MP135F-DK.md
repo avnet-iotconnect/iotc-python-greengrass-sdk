@@ -192,7 +192,8 @@ You will now be in the dashboard edit mode. You can add/remove widgets or just c
 <img width="=800" alt="dashboard_overview" src="https://github.com/user-attachments/assets/5141fb05-73c4-4166-9148-65820c0da7e6" />
 
 ## 11. Resources
-* Learn more in the [iotc-python-greengrass-sdk](https://github.com/avnet-iotconnect/iotc-python-greengrass-sdk) repository.
+* Try out the other available [greengrass lite components](https://github.com/avnet-iotconnect/iotc-python-greengrass-sdk/tree/main/examples)
+* Learn more and develop your own components: [iotc-python-greengrass-sdk](https://github.com/avnet-iotconnect/iotc-python-greengrass-sdk)
 * [Purchase the STM32MP135F-DK](https://www.avnet.com/shop/us/products/stmicroelectronics/stm32mp135f-dk-3074457345659849803/?srsltid=AfmBOopquBKia0rOHMSNs21TNvnk7RXm224OmsFITHs0A9LhuKjX4zHK)
 * [More /IOTCONNECT ST Guides](https://avnet-iotconnect.github.io/partners/st/)
 * [/IOTCONNECT Overview](https://www.iotconnect.io/)
