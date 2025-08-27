@@ -18,15 +18,15 @@
    * [Run the Setup Script](#run-the-setup-script)
 9. [Deploy the Pre-Built Component](#9-deploy-the-pre-built-component)
 
+   * [Load the Recipe](#load-therecipe)
    * [Load the Artifact](#load-the-artifact)
-   * [Update and Load the Recipe](#update-and-load-the-recipe)
    * [Create Firmware](#create-firmware)
    * [Deploy Firmware](#deploy-firmware)
 10. [Import a Dynamic Dashboard](#10-import-a-dynamic-dashboard)
 11. [Resources](#11-resources)
 
 ## 1. Introduction
-This guide will walk through the steps to create and demonstrate a Device Health Monitoring application solution on the STM32MP135F-DK.  The solution utilizes the new AWS Greengrass nucleus lite. Avnet's /IOTCONNECT platform will also be used to streamline all actions that would otherwise be performed in the AWS Console. The main tasks that will be performed are as follows:  
+This guide will walk through the steps to create and demonstrate a Device Health Monitoring application solution on the STM32MP135F-DK.  The solution utilizes the AWS Greengrass nucleus lite. Avnet's /IOTCONNECT platform will also be used to streamline all actions that would otherwise be performed in the AWS Console. The main tasks that will be performed are as follows:  
 
 1. Create an /IOTCONNECT account
 2. Import an example **Device Template** in /IOTCONNECT
