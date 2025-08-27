@@ -143,17 +143,17 @@ bash device-setup.sh ~/connectionKit.zip
 
 ## 9. Deploy the Pre-Built Component
 To deploy the pre-built component, we'll use /IOTCONNECT to create a deployment package that contains the artifact file and a recipe.
-* **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-dhm-demo-2.1.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.1.0.zip)
+* **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-basic-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-1.0.0.zip)
 
 ### Load the Recipe
 1. In the /IOTCONNECT platform, click **Package** at the bottom of the screen, then click **Components** at the top.
 <img width="1015" height="84" alt="click_package" src="https://github.com/user-attachments/assets/da800a4d-f5cf-4cd6-9438-ccefb5056501" />
 <img width="570" height="211" alt="click_components" src="https://github.com/user-attachments/assets/1ea5ae9d-c9e7-4abd-815b-6e4e6572a0d1" />
 
-2. In the "Create Component" box, browse for the recipe file ("recipe.yaml") from the previously extracted component archive here:  `<your working directory>\iotc-gg-component-dhm-demo-2.1.0\dhm-demo\greengrass-build\recipes\recipe.yaml`
+2. In the "Create Component" box, browse for the recipe file ("recipe.yaml") from the previously extracted component archive here:  `<your working directory>\iotc-gg-component-dhm-demo-1.0.0\dhm-demo\greengrass-build\recipes\recipe.yaml`
 
 ### Load the Artifact 
-1. Click the icon to the right of "dhm-demo.zip" and navigate to the dhm-demo.zip from the previously extracted archive here: `<your working directory>\iotc-gg-component-dhm-demo-2.1.0\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\2.1.0\dhm-demo.zip`
+1. Click the icon to the right of "dhm-demo.zip" and navigate to the dhm-demo.zip from the previously extracted archive here: `<your working directory>\iotc-gg-component-dhm-demo-1.0.0\dhm-demo\greengrass-build\artifacts\io.iotconnect.example.IotConnectSdkDhmDemo\1.0.0\dhm-demo.zip`
 2. Click **Save**
 
 ### Create Package
@@ -171,7 +171,7 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a deployment 
 <img width="567" height="155" alt="click_deploy" src="https://github.com/user-attachments/assets/1b321aa8-9351-4b3d-b841-dfc12c91233f" />
 
 2. Add a *Name* and select each item in the drop-downs (there will only be one option for each)
-3. Ensure you tick the box under "Components" and pick the version `2.1.0`
+3. Ensure you tick the box under "Components" and pick the version `1.0.0`
 4. **Click** *Deploy*
 
 The package with the component is now being deployed to the device.
