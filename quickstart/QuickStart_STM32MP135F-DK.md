@@ -162,7 +162,7 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a deployment 
 
 The package with the component is now being deployed to the device.
 
-This process can take 5 or more minutes, so wait until you see "Success" in the Deployment History.
+This process can take 5min or more, so wait until you see "Success" in the Deployment History.
 
 ## 10. Import a Dynamic Dashboard
 /IOTCONNECT Dynamic Dashboards are an easy way to visualize data and interact with edge devices.  
