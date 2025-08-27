@@ -33,8 +33,8 @@ This guide will walk through the steps to create and demonstrate a Device Health
 3. Create a **Greengrass Device** in /IOTCONNECT
 4. Setup **nucleus lite** on the target device
 5. Download and Register a pre-built **Greengrass Component** in /IOTCONNECT
-6. Create a **Firmware** package that defines the **Greengrass Components** deployed to the nucleus
-7. Deploy the **Firmware** to the target device
+6. Create a **Deployment** package that defines the **Greengrass Components** deployed to the nucleus
+7. Deploy the **Component** to the target device
 8. View live data and interact with the target device using **Dynamic Dashboards** in /IOTCONNECT
 
 ## 2. Requirements
@@ -134,7 +134,7 @@ bash device-setup.sh ~/connectionKit.zip
 > This script will set up the development environment and precompile Python packages and may take around 7 minutes.
 
 ## 9. Deploy the Pre-Built Component
-To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware package that contains the artifact file and a recipe.
+To deploy the pre-built component, we'll use /IOTCONNECT to create a deployment package that contains the artifact file and a recipe.
 * **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-dhm-demo-2.1.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.1.0.zip)
 
 ### Load the Recipe
@@ -146,7 +146,7 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 2. Click **Save**
 
 ### Create the Package
-1. Return to the **Component** tab and click **Create Firmware**
+1. Return to the **Package** tab and then, at the top-right, click **Package**
 ![img](media/iotc_firmware.png)  
 2. Enter a *Name* such as `MyDHMdemo`
 3. Select the `ggsdkdemo` Template
@@ -155,12 +155,14 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a firmware pa
 5. Click **Save**
 
 ### Deploy Firmware
-1. **Click** *Deployments*
+1. **Click** **Deploy**
 2. Add a *Name* and select each item in the drop-downs (there will only be one option for each)
 3. Ensure you tick the box under "Components" and pick the version `2.1.0`
 4. **Click** *Deploy*
 
-The Firmware with the component is now deployed on the device.
+The package with the component is now being deployed to the device.
+
+This process can take 5 or more minutes, so wait until you see "Success" in the Deployment History.
 
 ## 10. Import a Dynamic Dashboard
 /IOTCONNECT Dynamic Dashboards are an easy way to visualize data and interact with edge devices.  
