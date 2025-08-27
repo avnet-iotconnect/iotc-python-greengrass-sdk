@@ -194,11 +194,11 @@ about how each Component interacts with the SDK and /IOTCONNECT:
 You can download the pre-built Components (ready to deploy) and skip the *Modifying and Building The Example Components* step below.
 
 * Basic Demo: 
-    [iotc-gg-component-basic-demo-2.1.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-2.1.0.zip)
+    [iotc-gg-component-basic-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-1.0.0.zip)
 * Device Health Monitoring Demo: 
-    [iotc-gg-component-dhm-demo-2.1.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-2.1.0.zip)
+    [iotc-gg-component-dhm-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-1.0.0.zip)
 * Serial Port Demo:
-    [iotc-gg-component-dhm-demo-2.1.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-serial-demo-2.1.0.zip)
+    [iotc-gg-component-dhm-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-serial-demo-1.0.0.zip)
 
 # Modifying and Building The Example Components
 
