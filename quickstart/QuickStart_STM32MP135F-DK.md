@@ -71,7 +71,7 @@ The free subscription may be obtained directly from [iotconnect.io](https://iotc
 ## 5. /IOTCONNECT: Import the Device Template
 1. Download the pre-made Device Template: [all-apps-device-template.json](../examples/common/files/all-apps-device-template.json)
 2. Using the Sidebar menu in /IOTCONNECT, Navigate to *Device -> Greengrass Device -> Template (bottom menu)*.
-<img width="1017" height="74" alt="click_templates" src="https://github.com/user-attachments/assets/e20ee569-38a1-4da6-bce1-08c66169774a" />
+<img width="1017" height="50" alt="click_templates" src="https://github.com/user-attachments/assets/e20ee569-38a1-4da6-bce1-08c66169774a" />
 
 4. Click on the **Create Template** button and then the **Import** button and browse to select the device template .json file.
 <img width="326" height="227" alt="click_create_template" src="https://github.com/user-attachments/assets/6c6c3e4d-49fb-4cef-83ef-4a9a46f7adeb" />
@@ -173,6 +173,7 @@ To deploy the pre-built component, we'll use /IOTCONNECT to create a deployment 
 2. Add a *Name* and select each item in the drop-downs (there will only be one option for each)
 3. Ensure you tick the box under "Components" and pick the version `1.0.0`
 4. **Click** *Deploy*
+<img width="1457" height="440" alt="deploy_overview" src="https://github.com/user-attachments/assets/71122dc5-7315-4cfd-a9dc-e174a00edb0a" />
 
 The package with the component is now being deployed to the device.
 
@@ -188,6 +189,7 @@ This process can take 5min or more, so wait until you see "Success" in the Deplo
 * **Enter** a name (such as `My STM32MP135 Greengrass Dashboard`) and complete the import
 
 You will now be in the dashboard edit mode. You can add/remove widgets or just click `Save` in the upper-right corner to exit the edit mode.
+<img width="=800" alt="dashboard_overview" src="https://github.com/user-attachments/assets/5141fb05-73c4-4166-9148-65820c0da7e6" />
 
 ## 11. Resources
 * Learn more in the [iotc-python-greengrass-sdk](https://github.com/avnet-iotconnect/iotc-python-greengrass-sdk) repository.
