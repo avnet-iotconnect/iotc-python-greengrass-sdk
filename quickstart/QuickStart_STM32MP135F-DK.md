@@ -16,7 +16,7 @@
    * [Obtain the IP Address](#obtain-the-ip-address)
    * [Transfer the Device Information](#transfer-the-device-information)
    * [Run the Setup Script](#run-the-setup-script)
-9. [Deploy the Pre-Built Component](#9-deploy-the-pre-built-component)
+9. [Deploy the Greengrass Component](#9-deploy-the-greengrass-component)
 
    * [Load the Recipe](#load-the-recipe)
    * [Load the Artifact](#load-the-artifact)
@@ -141,7 +141,7 @@ bash device-setup.sh ~/connectionKit.zip
 > [!NOTE]
 > This script will set up the development environment and precompile Python packages and may take around 7 minutes.
 
-## 9. Deploy the Pre-Built Component
+## 9. Deploy the Greengrass Component
 To deploy the pre-built component, we'll use /IOTCONNECT to create a deployment package that contains the artifact file and a recipe.
 * **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-basic-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-1.0.0.zip)
 
