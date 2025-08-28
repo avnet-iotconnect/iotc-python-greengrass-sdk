@@ -185,8 +185,9 @@ This process can take 5min or more, so wait until you see "Success" in the Deplo
 
 * Switch back to the /IOTCONNECT browser window and verify the device status is displaying as `Connected`
 * **Click** `Create Dashboard` from the top of the page
-* **Select** the `Import Dashboard` option and select `ggsdkdemo` for **template** and your device name for **device** 
-* **Enter** a name (such as `My STM32MP135 Greengrass Dashboard`) and complete the import
+* **Select** the `Import Dashboard` option and **Click** *Browse* to select the dashboard template previously downloaded.
+* **Select** the *Template* ("ggsdkdemo") and your *Device Name*
+* **Enter** a name (such as `My STM32MP135 Greengrass Dashboard`) and **Click** *Save* the finalize the import
 
 You will now be in the dashboard edit mode. You can add/remove widgets or just click `Save` in the upper-right corner to exit the edit mode.
 <img width="=800" alt="dashboard_overview" src="https://github.com/user-attachments/assets/5141fb05-73c4-4166-9148-65820c0da7e6" />
