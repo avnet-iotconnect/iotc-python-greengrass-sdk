@@ -145,7 +145,7 @@ bash device-setup.sh ~/connectionKit.zip
 
 ## 9. Deploy the Greengrass Component
 To deploy the pre-built component, we'll use /IOTCONNECT to create a deployment package that contains the artifact file and a recipe.
-* **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-basic-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-basic-demo-1.0.0.zip)
+* **Download** and **Extract** the *Device Health Monitoring Component*: [iotc-gg-component-dhm-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-1.0.0.zip)
 
 ### Load the Recipe
 1. In the /IOTCONNECT platform, click **Package** at the bottom of the screen, then click **Components** at the top.
