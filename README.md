@@ -198,7 +198,7 @@ You can download the pre-built Components (ready to deploy) and skip the *Modify
 * Device Health Monitoring Demo: 
     [iotc-gg-component-dhm-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-dhm-demo-1.0.0.zip)
 * Serial Port Demo:
-    [iotc-gg-component-dhm-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-serial-demo-1.0.0.zip)
+    [iotc-gg-component-serial-demo-1.0.0.zip](https://downloads.iotconnect.io/greengrass/components/iotc-gg-component-serial-demo-1.0.0.zip)
 
 # Modifying and Building The Example Components
 
