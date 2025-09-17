@@ -148,13 +148,16 @@ function install_ggl {
   # do not pick up the systemd unit files (see below)
   mkdir -p /var/lib/greengrass
 
-  deb_package=aws-greengrass-lite-2.1.0-Linux.deb
+# Pull v2.2.2 and don't hard-code the .deb filename
   deb_zip=aws-greengrass-lite-ubuntu-arm64.zip
+
   rm -f "${deb_package}"
   rm -f "${deb_zip}"
-  wget -nv "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.1.0/${deb_zip}"
+  wget -nv "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.2.2/${deb_zip}"
   unzip -q -o "${deb_zip}"
-
+  
+  # Find the .deb that was unzipped (name includes the version)
+  deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
   dpkg-deb --raw-extract "${deb_package}" ./pkg
 
   # here we pick up the proper systemd files
