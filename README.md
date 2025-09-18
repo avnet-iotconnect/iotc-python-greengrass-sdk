@@ -6,7 +6,7 @@ This repository provides the Avnet /IOTCONNECT AWS Greengrass SDK for building *
 With this SDK you can:
 - **Use the provided example Components** to send telemetry, receive commands, and handle OTA updates (OTA push support coming soon)
 - **Write your own Python Components** using the /IOTCONNECT 2.1 JSON protocol, with built-in helpers for `send_telemetry()`, command callbacks, and OTA lifecycle
-- **Deploy Components and Firmware** via the IoTConnect Web UI (Device Template → Component registration → Firmware = set of Components → Deployment)
+- **Deploy Components and Firmware** via the /IOTCONNECT Web UI (Device Template → Component registration → Firmware = set of Components → Deployment)
 
 > **ℹ️ Note:** While examples may compile on other platforms, official guides, build scripts, and tested installers in this repo target **Linux** only.  
 
@@ -211,7 +211,7 @@ Make your modifications to the files as needed, and update the version numbers i
 >[!TIP]
 > For example, if the current version of the demo in this repo is ```2.1.0```, it is recommended to make your modified versions ```2.1.1``` and then ```2.1.2```, etc.
 
-After all of your modifications are saved, enter your IoTConnect CPID and Environment as shown here:
+After all of your modifications are saved, enter your /IOTCONNECT CPID and Environment as shown here:
 
 ```shell
 export IOTC_ENV=YourENV
