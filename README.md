@@ -93,7 +93,7 @@ linux utility, Rufus, Balena Etcher and similar on other OS-es.
 
 # Device Setup
 
-Once your Greengrass device is created in /IOTCONNECT. Download the device credentials 
+Once your Greengrass device is created in /IOTCONNECT, download the device credentials 
 and transfer them to the device.
 
 Either clone this repo on the device and run [installer/openstlinux/device-setup.sh](installer/openstlinux/device-setup.sh) in this directory,
@@ -174,7 +174,7 @@ bash device-setup.sh ~/my-device-package.zip
 
 [comment]: <> (-------------------------------------------------------------------------)
 
-Once the device specific installer completes, The Greengrass Nucleus Lite should be running,
+Once the device specific installer completes, the Greengrass Nucleus Lite should be running,
 and the device should show up as **Connected** in /IOTCONNECT within a minute or so. 
 You can proceed to develop and/or deploy your greengrass Component.
 
@@ -235,6 +235,9 @@ Now you can execute ```build.sh``` (may require sudo privileges) to build your n
 This guide will summarize some of the steps to deploy your Components with /IOTCONNECT, 
 but for more details and a guide with screenshots, please refer to the 
 [/IOTCONNECT Greengrass Quickstart](https://docs.iotconnect.io/iotconnect/quick-start/greengrass-device/).
+
+To explore a repository of some custom Python greengrass components developed by Avnet's IoT engineers, 
+check out the [/IOTCONNECT Python Greengrass Components repo](https://github.com/avnet-iotconnect/iotc-python-greengrass-components).
 
 Once your Component is built or the pre-built Component downloaded, 
 you can upload the zip artifact along with the recipe from the
