@@ -23,7 +23,7 @@ In order to run an /IOTCONNECT Greengrass Component using this SDK:
 7. The Firmware will need to be deployed to your target device.
 
 # Board Specific QuickStart Guide(s)
-* [STM32MP135F-DK](quickstart/QuickStart_STM32MP135F-DK.md)
+* [STM32MP135F-DK](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/stm32mp135f-dk/QuickStart.md)
 
 Follow the steps below for details on how to complete each step for other target boards.
 
