@@ -99,7 +99,7 @@ and transfer them to the device.
 Either clone this repo on the device and run [installer/openstlinux/device-setup.sh](installer/openstlinux/device-setup.sh) in this directory,
 or directly download and run this script:
 ```shell
-wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-sdk/refs/heads/ggl-sdk-update-2.2/installer/openstlinux/device-setup.sh -O device-setup.sh
+wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-sdk/refs/heads/main/installer/openstlinux/device-setup.sh -O device-setup.sh
 bash device-setup.sh ~/my-device-package.zip
 ```
 
