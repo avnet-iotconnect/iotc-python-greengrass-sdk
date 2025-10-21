@@ -23,7 +23,12 @@ In order to run an /IOTCONNECT Greengrass Component using this SDK:
 7. The Firmware will need to be deployed to your target device.
 
 # Board Specific QuickStart Guide(s)
-* [STM32MP135F-DK](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/stm32mp135f-dk/QuickStart.md)
+* [NXP FRDM i.MX 93](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/nxp-frdm-imx-93/README.md) - ([Product Link](https://www.avnet.com/shop/us/products/nxp/frdm-imx93-3074457345660216004/))
+* [Raspberry Pi](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/raspberrypi/README.md)
+* [ST STM32MP135F-DK Discovery Kit](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/stm32mp135f-dk/README.md) - ([Product Link](https://www.st.com/en/evaluation-tools/stm32mp135f-dk.html))
+* [ST STM32MP157F-DK2 Discovery Kit](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/stm32mp157f-dk2/README.md) - ([Product Link](https://www.newark.com/stmicroelectronics/stm32mp157f-dk2/discovery-kit-arm-cortex-a7-cortex/dp/14AJ2731))
+* [ST STM32MP257F-DK Discovery Kit](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/stm32mp257f-dk/README.md) - ([Product Link](https://www.avnet.com/americas/product/stmicroelectronics/stm32mp257f-dk/EVOLVE-115914011/))
+* [ST STM32MP257F-EV1 Discovery Kit](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/stm32mp257f-ev1/README.md) - ([Product Link](https://www.avnet.com/americas/product/stmicroelectronics/stm32mp257f-ev1/EVOLVE-115913010?srsltid=AfmBOooi8P39Xi7OPSW1CMYH3uWdvLvtFk_jceqzKMmL64x2kRm2Roxa&srsltid=AfmBOooi8P39Xi7OPSW1CMYH3uWdvLvtFk_jceqzKMmL64x2kRm2Roxa))
 
 Follow the steps below for details on how to complete each step for other target boards.
 
