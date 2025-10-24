@@ -67,6 +67,8 @@ wget https://raw.githubusercontent.com/avnet-iotconnect/iotc-python-greengrass-s
 bash device-setup.sh ~/my-device-bundle.zip
 ```
 
+> **Note:** Use *sudo bash device-setup.sh ~/my-device-bundle.zip* on a PC or an EC2 instance for example.
+
 </details>
 
 [comment]: <> (-------------------------------------------------------------------------)
