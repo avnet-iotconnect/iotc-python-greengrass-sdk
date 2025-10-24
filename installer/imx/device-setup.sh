@@ -49,13 +49,15 @@ ldconfig
 rm -f /etc/apt/sources.list.d/bookworm.list
 apt clean
 
+apt remove -y aws-greengrass-lite 2> /dev/null || :
+
 #### Install the GGL deb
 rm -rf /tmp/ggl-install
 mkdir -p /tmp/ggl-install
 pushd /tmp/ggl-install >/dev/null
-deb_package=aws-greengrass-lite-2.1.0-Linux.deb
-wget -nv https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.1.0/aws-greengrass-lite-ubuntu-arm64.zip
+wget -nv https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.2.2/aws-greengrass-lite-ubuntu-arm64.zip
 unzip -q -o aws-greengrass-lite-ubuntu-arm64.zip
+deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
 remove_all_deps() {
   deb_package="$1"
   dpkg-deb -e "$deb_package"
