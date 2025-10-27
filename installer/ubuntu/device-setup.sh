@@ -51,13 +51,14 @@ case $(uname -m) in
   *)       echo "Error: The installer does not support this system"; exit 1 ;;
 esac
 
+systemctl stop greengrass-lite.target || :
 apt remove -y aws-greengrass-lite 2> /dev/null || :
 
 zip_file=aws-greengrass-lite-ubuntu-${arch_suffix}.zip
 mkdir -p /tmp/ggl-download
 pushd /tmp/ggl-download >/dev/null
 wget -nv \
-  "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.2.0/${zip_file}" \
+  "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.2.2/${zip_file}" \
   -O "${zip_file}"
 unzip -o "${zip_file}"
 if [[ $release_ok != yes ]]; then
