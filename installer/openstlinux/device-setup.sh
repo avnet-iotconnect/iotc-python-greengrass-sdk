@@ -148,17 +148,16 @@ function install_ggl {
   # do not pick up the systemd unit files (see below)
   mkdir -p /var/lib/greengrass
 
-# Pull v2.2.2 and don't hard-code the .deb filename
-  deb_zip=aws-greengrass-lite-ubuntu-arm64.zip
+  zip_file=aws-greengrass-lite-ubuntu-arm64.zip
+  rm -f "${zip_file}"
+  wget -nv \
+    "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.2.2/${zip_file}" \
+    -O "${zip_file}"
+  rm -f -- *.deb
+  unzip -q -o "${zip_file}"
 
-  rm -f "${deb_package}"
-  rm -f "${deb_zip}"
-  wget -nv "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.2.2/${deb_zip}"
-  unzip -q -o "${deb_zip}"
-  
-  # Find the .deb that was unzipped (name includes the version)
-  deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
-  dpkg-deb --raw-extract "${deb_package}" ./pkg
+  #deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
+  dpkg-deb --raw-extract aws-greengrass-lite-*-Linux.deb ./pkg
 
   # here we pick up the proper systemd files
   cp -rf pkg/lib/systemd/* /lib/systemd
@@ -174,12 +173,13 @@ function setup_nucleus_credentials {
   mkdir -p /tmp/iotc-config
   pushd /tmp/iotc-config >/dev/null
   unzip -q -o "${connection_kit_path}"
-
-   mv config.yaml /etc/greengrass/config.yaml
-   chmod a-x /etc/greengrass/config.yaml # just in case
-   mkdir -p /var/lib/greengrass/certs/
-   chown ggcore:ggcore /var/lib/greengrass/certs
-   chmod 775 /var/lib/greengrass/certs
+  # replace with proper nucleus
+  sed -ie 's:{{nucleus_component}}:aws.greengrass.NucleusLite:g' config.yaml
+  mv config.yaml /etc/greengrass/config.yaml
+  chmod a-x /etc/greengrass/config.yaml # just in case
+  mkdir -p /var/lib/greengrass/certs/
+  chown ggcore:ggcore /var/lib/greengrass/certs
+  chmod 775 /var/lib/greengrass/certs
   # there should be only one pem and crt here, so this is fine
   if [[ -f AmazonRootCA1.pem ]]; then
     # the new connection kit will have the proper files
@@ -209,12 +209,12 @@ END
 # Use only revisions that are known to work. We don't want future changes to break something.
 if [[ "$(uname -m)" == "armv7l" ]]; then
   st_repo=STM32MP1_AWS-IoT-Greengrass-nucleus-lite
-  st_revision=7585a4de19ae9726995eb27df732a720f47af527
+  st_revision=c10b35f73eec09bdc9818a67e871304966db74d4
   mp1_install_build_packages
   mp1_build_wheel_cache
 elif [[ "$(uname -m)" == "aarch64" ]]; then
   st_repo=STM32MP2_AWS-IoT-Greengrass-nucleus-lite
-  st_revision=54292e3f7d64ec84a880e9bb727e5f7836409f1b
+  st_revision=7bb5243512bc18fffef75fd7d7df728f8cba7725
 else
   echo "Unknown architecture. Exiting..."
   exit 1
