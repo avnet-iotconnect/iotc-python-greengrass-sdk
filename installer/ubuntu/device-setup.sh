@@ -54,17 +54,20 @@ esac
 systemctl stop greengrass-lite.target || :
 apt remove -y aws-greengrass-lite 2> /dev/null || :
 
-zip_file=aws-greengrass-lite-ubuntu-${arch_suffix}.zip
+zip_file=aws-greengrass-lite-deb-${arch_suffix}.zip
 mkdir -p /tmp/ggl-download
 pushd /tmp/ggl-download >/dev/null
 wget -nv \
-  "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.2.2/${zip_file}" \
+  "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.3.0/${zip_file}" \
   -O "${zip_file}"
 unzip -o "${zip_file}"
 if [[ $release_ok != yes ]]; then
     echo "WARNING: This deb package will likely only install on Ubuntu 24.xx versions!"
 fi
+
 deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
+systemctl stop greengrass-lite.target 2>/dev/null || :
+apt remove -y aws-greengrass-lite >/dev/null 2>/dev/null || :
 apt install -y ./"${deb_package}"
 popd >/dev/null
 rm -rf /tmp/ggl-download
