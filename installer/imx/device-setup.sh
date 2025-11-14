@@ -55,8 +55,9 @@ apt remove -y aws-greengrass-lite 2> /dev/null || :
 rm -rf /tmp/ggl-install
 mkdir -p /tmp/ggl-install
 pushd /tmp/ggl-install >/dev/null
-wget -nv https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.3.0/aws-greengrass-lite-deb-arm64.zip
-unzip -q -o aws-greengrass-lite-deb-arm64.zip
+zip_file=aws-greengrass-lite-deb-arm64.zip
+wget -nv https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.3.0/${zip_file}
+unzip -q -${zip_file}
 deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
 remove_all_deps() {
   deb_package="$1"
