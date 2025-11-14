@@ -62,6 +62,17 @@ function mp1_install_build_packages {
   echo Done installing development packages.
 }
 
+function mp2_install_build_packages {
+  # Sometimes the system will need to natively compile some packages.
+  # Specifically awsiotsdk will be needed by all our Greengrass Components it ant will want awscrt compiled.
+  # python3-cffi would be needed to compile the cryptography package on the device. May be needed in the future
+  # for the iotconnect-rest-api python package.
+  # The rest of the packages would setup a proper development environment.
+  echo Installing development packages...
+  apt -q -y install python3-cffi make gcc g++ gcc-symlinks cpp-symlinks g++-symlinks binutils libc6-extra-nss libnss-db2 libc-malloc-debug0
+  echo Done installing development packages.
+}
+
 function mp1_build_wheel_cache {
   # Pre-build python packages needed by the SDK and demos.
   # Otherwise this would take very long time during component installs
@@ -222,6 +233,7 @@ if [[ "$(uname -m)" == "armv7l" ]]; then
   mp1_build_wheel_cache
 elif [[ "$(uname -m)" == "aarch64" ]]; then
   broad_arch=arm64
+  mp2_install_build_packages
   st_repo=STM32MP2_AWS-IoT-Greengrass-nucleus-lite
   st_revision=7bb5243512bc18fffef75fd7d7df728f8cba7725
 else
