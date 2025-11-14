@@ -138,9 +138,9 @@ ROOT_HOME = "/root"
 [comment]: <> (-------------------------------------------------------------------------)
 
 <details>
-<summary>IMX 6.6 scarthgap Linux releases</summary>
+<summary>IMX 93 FRDM 6.6 scarthgap Linux releases</summary>
 
-This process has been tested with FRDM-IMX93, but it should support other IMX MPU boards with that can load the 
+This process has been tested with FRDM-IMX93, but it should support other IMX MPU boards that can load the 
 6.6 scarthgap Linux release.
 
 While the default image on the device's eMMC could work as well, and even be restored or upgraded using the *uuu* tool,
@@ -148,8 +148,7 @@ we recommend using an SD Card instead, so that the eMMC stays pristine and the i
 
 From 
 [this link](https://www.nxp.com/design/design-center/development-boards-and-designs/frdm-i-mx-93-development-board:FRDM-IMX93#software)
-, download the FRDM-IMX93 Demo Images (LF_v6.6.36-2.1.0_images_FRDM_1.0_i.MX93) package.
-
+, download the **FRDM-IMX93 Demo Images Rev 1.0** (LF_v6.6.36-2.1.0_images_FRDM_1.0_i.MX93) package.
 
 Use an adequate tool for your system to flash the **imx-image-full-imx93frdm.rootfs.wic.zst** image - *dd* on Linux
 , Rufus, Balena Etcher and similar on other OS-es. 
@@ -165,11 +164,12 @@ where sdX will be your SDcard device listed by ```lsblk```.
 
 Consult the *FRDM i.MX 93 Development Board Quick Start Guide* from the 
 [Documentation Section](https://www.nxp.com/design/design-center/development-boards-and-designs/frdm-i-mx-93-development-board:FRDM-IMX93#documentation)
-on how to connect the USB ports, setup network, and configure the SW1 boot switch. To boot from an SD card
-, ensure that the board's *SW1 BOOT* switches are set to *0011* (4 to 1) configuration
-before booting up the device.
+on how to connect the USB ports, setup network, and configure the SW1 boot switch at the center of the board. 
+To boot from an SD card, ensure that the board's *SW1 BOOT* switches are set to *0011* (4 to 1) configuration
+before booting up the device. The switch positions will be UP-UP-DOWN-DOWN.
 
-Connect to either the USB serial console, or SSH to the device as root user.
+Connect to either the USB serial console, or SSH to the device as root user once you find the IP address of it 
+on your router or a tool like *nmap*.
 
 At the console prompt enter:
 ```shell

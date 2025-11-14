@@ -62,6 +62,17 @@ function mp1_install_build_packages {
   echo Done installing development packages.
 }
 
+function mp2_install_build_packages {
+  # Sometimes the system will need to natively compile some packages.
+  # Specifically awsiotsdk will be needed by all our Greengrass Components it ant will want awscrt compiled.
+  # python3-cffi would be needed to compile the cryptography package on the device. May be needed in the future
+  # for the iotconnect-rest-api python package.
+  # The rest of the packages would setup a proper development environment.
+  echo Installing development packages...
+  apt -q -y install python3-cffi make gcc g++ gcc-symlinks cpp-symlinks g++-symlinks binutils libc6-extra-nss libnss-db2 libc-malloc-debug0
+  echo Done installing development packages.
+}
+
 function mp1_build_wheel_cache {
   # Pre-build python packages needed by the SDK and demos.
   # Otherwise this would take very long time during component installs
@@ -127,9 +138,9 @@ function mp1_build_wheel_cache {
 function install_ggl {
   # This is a blend between the installation from the ST's repo
   # and the install scripts from AWS published aarch64 debian package
-  # We pick up the binaries from ST, but leave the services and other stuff running as ggcore
-  # as intended by AWS
+  # We pick up the binaries from ST, but force install of the deb without deps
 
+  ### Install deps
   rm -rf /tmp/ggl-install
   mkdir -p /tmp/ggl-install
   pushd /tmp/ggl-install>/dev/null
@@ -137,32 +148,39 @@ function install_ggl {
   pushd "${st_repo}" >/dev/null
   git reset --hard ${st_revision}
   dpkg -i gg_lite/*.deb # install deps
-  popd >/dev/null # out of $repo..
+  popd >/dev/null # out of st_repo
+  rm -rf "${st_repo}"
 
-
-  # it is actually a tgz but for some reason with .gz extension
-  tar xf "${st_repo}/gg_lite/gglite.gz"
-  chown -R root:root ./aws-greengrass-lite
-  cp -f ./aws-greengrass-lite/bin/* /usr/bin/.
-  cp -rf ./aws-greengrass-lite/lib/tmpfiles.d /usr/lib/
-  # do not pick up the systemd unit files (see below)
-  mkdir -p /var/lib/greengrass
-
-  zip_file=aws-greengrass-lite-ubuntu-arm64.zip
+  ### Get the zip and extract the deb
+  zip_file=aws-greengrass-lite-deb-${broad_arch}.zip
   rm -f "${zip_file}"
   wget -nv \
-    "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.2.2/${zip_file}" \
+    "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.3.0/${zip_file}" \
     -O "${zip_file}"
   rm -f -- *.deb
   unzip -q -o "${zip_file}"
 
-  #deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
-  dpkg-deb --raw-extract aws-greengrass-lite-*-Linux.deb ./pkg
+  ### Remove deps from deb package and install it
+  deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
+  dpkg-deb -e "$deb_package"
+  sed -i '/^Depends:/d' DEBIAN/control
+  pushd DEBIAN >/dev/null
+  tar -czf ../control.tar.gz .
+  popd >/dev/null
+  ar r "$deb_package" control.tar.gz
+  rm -rf ./DEBIAN
+  rm -f control.tar.gz
 
-  # here we pick up the proper systemd files
-  cp -rf pkg/lib/systemd/* /lib/systemd
-  bash -x pkg/DEBIAN/postinst
-
+  ### Now install the deb without deps
+  set +x # avoid output confusion
+  echo "--------------------------------------------"
+  echo " The setup process will now install the Greengrass Lite package."
+  echo " This process may take some time..."
+  echo "--------------------------------------------"
+  set -x
+  systemctl stop greengrass-lite.target 2>/dev/null || :
+  apt remove -y aws-greengrass-lite >/dev/null 2>/dev/null || :
+  dpkg -i "./${deb_package}"
 
   popd >/dev/null # out of $repo..
   rm -rf /tmp/ggl-install
@@ -208,11 +226,14 @@ END
 # It should be the case that mp1 is armv7l and the mp2 should be aarch64
 # Use only revisions that are known to work. We don't want future changes to break something.
 if [[ "$(uname -m)" == "armv7l" ]]; then
+  broad_arch=armv7
   st_repo=STM32MP1_AWS-IoT-Greengrass-nucleus-lite
   st_revision=c10b35f73eec09bdc9818a67e871304966db74d4
   mp1_install_build_packages
   mp1_build_wheel_cache
 elif [[ "$(uname -m)" == "aarch64" ]]; then
+  broad_arch=arm64
+  mp2_install_build_packages
   st_repo=STM32MP2_AWS-IoT-Greengrass-nucleus-lite
   st_revision=7bb5243512bc18fffef75fd7d7df728f8cba7725
 else
