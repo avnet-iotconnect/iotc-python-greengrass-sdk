@@ -48,7 +48,7 @@ Manifests:
       # that enforces a globally unique name (zip may be renamed to include a version)
       install:
         RequiresPrivilege: false
-        Timeout: 600
+        Timeout: 6000
         Script: |
           bash -x {artifacts:decompressedPath}/serial-demo*/wrapper/component-install.sh
       run:
