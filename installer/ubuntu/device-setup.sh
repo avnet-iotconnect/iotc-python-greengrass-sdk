@@ -58,7 +58,7 @@ zip_file=aws-greengrass-lite-deb-${arch_suffix}.zip
 mkdir -p /tmp/ggl-download
 pushd /tmp/ggl-download >/dev/null
 wget -nv \
-  "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.3.0/${zip_file}" \
+  "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.3.2/${zip_file}" \
   -O "${zip_file}"
 unzip -o "${zip_file}"
 if [[ $release_ok != yes ]]; then
