@@ -136,20 +136,17 @@ function mp1_build_wheel_cache {
 }
 
 function install_ggl {
-  # This is a blend between the installation from the ST's repo
-  # and the install scripts from AWS published aarch64 debian package
-  # We pick up the binaries from ST, but force install of the deb without deps
+  # We take the official AWS SDK package and install it without deps.
+  # We manually install the dependencies.
 
-  ### Install deps
+  ### Install deps that should satisfy what the AWS package will need.
+  # We will remove from the actual deps of the deb package later.
+  apt install -y libzip uriparser
+
+  ### Prepare the temporary work area
   rm -rf /tmp/ggl-install
   mkdir -p /tmp/ggl-install
   pushd /tmp/ggl-install>/dev/null
-  git clone "https://github.com/stm32-hotspot/${st_repo}.git"
-  pushd "${st_repo}" >/dev/null
-  git reset --hard ${st_revision}
-  dpkg -i gg_lite/*.deb # install deps
-  popd >/dev/null # out of st_repo
-  rm -rf "${st_repo}"
 
   ### Get the zip and extract the deb
   zip_file=aws-greengrass-lite-deb-${broad_arch}.zip
@@ -161,6 +158,7 @@ function install_ggl {
   unzip -q -o "${zip_file}"
 
   ### Remove deps from deb package and install it
+  ### by exploding the deb, removing the Depends field from control and re-packing it.
   deb_package="$(ls -1 aws-greengrass-lite-*-Linux.deb | head -n1)"
   dpkg-deb -e "$deb_package"
   sed -i '/^Depends:/d' DEBIAN/control
