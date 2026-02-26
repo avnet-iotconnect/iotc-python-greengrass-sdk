@@ -152,7 +152,7 @@ function install_ggl {
   zip_file=aws-greengrass-lite-deb-${broad_arch}.zip
   rm -f "${zip_file}"
   wget -nv \
-    "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.3.2/${zip_file}" \
+    "https://github.com/aws-greengrass/aws-greengrass-lite/releases/download/v2.3.3/${zip_file}" \
     -O "${zip_file}"
   rm -f -- *.deb
   unzip -q -o "${zip_file}"
