@@ -22,7 +22,7 @@ In order to run an /IOTCONNECT Greengrass Component using this SDK:
 6. A Firmware will need to be created, that defines which Components will be deployed to your Nucleus
 7. The Firmware will need to be deployed to your target device.
 
-# Board Specific QuickStart Guide(s)
+# Board Specific QuickStart Guides
 * [NXP FRDM i.MX 93](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/nxp-frdm-imx-93/README.md) - ([Product Link](https://www.avnet.com/shop/us/products/nxp/frdm-imx93-3074457345660216004/))
 * [Raspberry Pi](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/raspberry-pi/README.md)
 * [ST STM32MP135F-DK Discovery Kit](https://github.com/avnet-iotconnect/iotc-python-greengrass-demos/blob/main/stm32mp135f-dk/README.md) - ([Product Link](https://www.st.com/en/evaluation-tools/stm32mp135f-dk.html))
